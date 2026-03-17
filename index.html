@@ -10,93 +10,118 @@
   body {
     font-family: 'Segoe UI', Arial, sans-serif;
     background: #fdf0f4;
-    padding: 32px 24px;
+    padding: 16px 12px;
     color: #2d1a22;
   }
 
+  /* ── Banner ── */
   .event-banner {
     background: linear-gradient(135deg, #d4607e, #e8a0b8);
     color: #fff;
     text-align: center;
     border-radius: 14px;
-    padding: 18px 24px;
-    margin-bottom: 28px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
     box-shadow: 0 4px 18px rgba(212,96,126,0.28);
   }
-  .event-banner .main { font-size: 22px; font-weight: 800; letter-spacing: 0.5px; }
-  .event-banner .sub  { font-size: 13px; opacity: 0.88; margin-top: 5px; letter-spacing: 0.2px; }
+  .event-banner .main { font-size: clamp(15px, 4vw, 22px); font-weight: 800; letter-spacing: 0.4px; line-height: 1.3; }
+  .event-banner .sub  { font-size: clamp(11px, 2.5vw, 13px); opacity: 0.88; margin-top: 5px; }
+
+  /* ── Scroll wrapper — key for mobile ── */
+  .scroll-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 14px;
+    box-shadow: 0 4px 24px rgba(212,96,126,0.13);
+  }
 
   .chart-wrap {
     background: #fff;
     border-radius: 14px;
-    box-shadow: 0 4px 24px rgba(212,96,126,0.13);
-    overflow: hidden;
+    min-width: 680px; /* prevents collapse on small screens */
   }
 
-  .scroll-area {
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
+  /* col 1=names(170px), col 2=hotel(120px), 9 date cols */
   .grid {
     display: grid;
-    grid-template-columns: 195px 138px repeat(9, 1fr);
+    grid-template-columns: 170px 115px repeat(9, minmax(52px, 1fr));
   }
 
+  /* ── Sticky name column ── */
+  .row-name, .hdr.name-hdr, .section-sep {
+    position: sticky;
+    left: 0;
+    z-index: 3;
+  }
+  /* section separators span full width but still need left sticky for label */
+  .section-sep {
+    grid-column: 1 / -1;
+    position: relative; /* override sticky — full-width rows don't need it */
+  }
+
+  /* ── Column headers ── */
   .hdr {
     background: #b5476a;
     color: #fff;
-    font-size: 12px; font-weight: 700;
+    font-size: 11px; font-weight: 700;
     text-align: center;
-    padding: 10px 4px; line-height: 1.4;
+    padding: 9px 3px; line-height: 1.4;
+    position: sticky; top: 0; z-index: 2;
   }
-  .hdr.name-hdr { text-align: left; padding-left: 16px; }
-  .hdr.weekend  { background: #9e3a5c; }
+  .hdr.name-hdr {
+    text-align: left; padding-left: 14px;
+    z-index: 4; /* above other sticky */
+  }
+  .hdr.hotel-hdr { z-index: 2; }
+  .hdr.weekend   { background: #9e3a5c; }
   .hdr.shower-col {
     background: linear-gradient(180deg, #d4607e, #b5476a);
-    position: relative;
   }
-  .hdr.shower-col::after { content: '🧸'; display: block; font-size: 14px; line-height: 1; }
-  .hdr.extend   { background: #882e4c; }
+  .hdr.shower-col::after { content: '🧸'; display: block; font-size: 13px; line-height: 1; }
+  .hdr.extend    { background: #882e4c; }
 
+  /* ── Section separators ── */
   .section-sep {
-    grid-column: 1 / -1;
-    padding: 7px 16px;
+    padding: 6px 14px;
     font-size: 11px; font-weight: 700;
-    letter-spacing: 1.2px; text-transform: uppercase;
+    letter-spacing: 1.1px; text-transform: uppercase;
   }
   .section-sep.family  { background: #fde8ef; color: #9e3a5c; border-top: 2px solid #d4607e; }
   .section-sep.friends { background: #fdebd0; color: #935116; border-top: 2px solid #ca6f1e; margin-top: 4px; }
 
+  /* ── Name / hotel cells ── */
   .row-name {
     display: flex; align-items: center;
-    padding: 0 8px 0 16px;
-    font-size: 13px; font-weight: 600;
+    padding: 0 6px 0 14px;
+    font-size: 12px; font-weight: 600;
     border-bottom: 1px solid #fae0e8;
-    min-height: 58px; background: #fffbfc;
+    min-height: 54px;
+    background: #fffbfc;
+    line-height: 1.35;
   }
   .row-hotel {
     display: flex; align-items: center; justify-content: center;
-    text-align: center; font-size: 11px; font-weight: 600;
-    padding: 4px 8px; line-height: 1.4;
+    text-align: center; font-size: 10px; font-weight: 600;
+    padding: 4px 6px; line-height: 1.35;
     border-bottom: 1px solid #fae0e8;
     border-left: 1px solid #fae0e8;
   }
 
+  /* ── Day cells ── */
   .day-cell {
     border-bottom: 1px solid #fae0e8;
     border-left: 1px solid #fae0e8;
     display: flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 700;
-    min-height: 58px; position: relative;
+    font-size: 10px; font-weight: 700;
+    min-height: 54px; position: relative;
     transition: filter .15s;
   }
-  .day-cell:hover:not(.empty) { filter: brightness(.91); cursor: default; }
+  .day-cell:active:not(.empty) { filter: brightness(.88); }
   .day-cell.empty { background: #fffbfc; }
   .day-cell.weekend-bg.empty { background: #fef3f6; }
   .day-cell.extend-bg.empty  { background: #fdeef3; }
 
+  /* ── Hotel colour schemes ── */
   .crowne-bar  { background: #2471a3; color: #fff; }
   .crowne-mid  { background: #5ba3d0; color: #fff; }
   .crowne-lite { background: #d6eaf8; color: #1a5276; }
@@ -118,81 +143,75 @@
   .tbd-hotel{ background: #fdebd0; color: #7e5109; border-left: 4px solid #ca6f1e; }
 
   .arrive-label, .depart-label {
-    font-size: 10px; font-weight: 800;
+    font-size: 9px; font-weight: 800;
     display: flex; flex-direction: column;
     align-items: center; gap: 2px;
     line-height: 1.2; letter-spacing: 0.2px;
   }
-  .arrive-label .icon, .depart-label .icon { font-size: 15px; }
+  .arrive-label .icon, .depart-label .icon { font-size: 14px; }
 
+  /* ── Shower marker ── */
   .shower-marker {
     background: linear-gradient(135deg, #e8799a, #f2b3c6) !important;
     color: #fff !important;
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
-    font-size: 10px; font-weight: 800;
+    font-size: 9px; font-weight: 800;
     gap: 2px; line-height: 1.3;
   }
 
-  .day-cell[data-tip]:hover::after {
-    content: attr(data-tip);
-    position: absolute;
-    bottom: calc(100% + 6px); left: 50%;
-    transform: translateX(-50%);
-    background: #2d1a22; color: #fff;
-    font-size: 11px; font-weight: 500;
-    padding: 5px 10px; border-radius: 6px;
-    white-space: nowrap; z-index: 10; pointer-events: none;
+  /* ── Tooltip (desktop hover) ── */
+  @media (hover: hover) {
+    .day-cell[data-tip]:hover::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 6px); left: 50%;
+      transform: translateX(-50%);
+      background: #2d1a22; color: #fff;
+      font-size: 11px; font-weight: 500;
+      padding: 5px 10px; border-radius: 6px;
+      white-space: nowrap; z-index: 20; pointer-events: none;
+    }
   }
 
+  /* ── Mobile tooltip — tap to reveal ── */
+  @media (hover: none) {
+    .day-cell[data-tip]:focus::after,
+    .day-cell[data-tip].tapped::after {
+      content: attr(data-tip);
+      position: fixed;
+      bottom: 24px; left: 50%;
+      transform: translateX(-50%);
+      background: #2d1a22; color: #fff;
+      font-size: 12px; font-weight: 500;
+      padding: 8px 14px; border-radius: 8px;
+      white-space: nowrap; z-index: 999; pointer-events: none;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    }
+  }
+
+  /* ── Legend ── */
   .legend {
-    display: flex; flex-wrap: wrap; gap: 12px;
-    padding: 18px 24px;
+    display: flex; flex-wrap: wrap; gap: 10px;
+    padding: 14px 16px;
     border-top: 1px solid #fae0e8;
     background: #fffbfc; align-items: center;
   }
-  .legend-item { display: flex; align-items: center; gap: 7px; font-size: 12px; color: #7b2d44; }
-  .legend-swatch { width: 18px; height: 18px; border-radius: 4px; flex-shrink: 0; }
-  .legend-note { margin-left: auto; font-size: 12px; font-style: italic; color: #c07090; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #7b2d44; }
+  .legend-swatch { width: 16px; height: 16px; border-radius: 4px; flex-shrink: 0; }
+  .legend-note {
+    width: 100%; font-size: 11px; font-style: italic; color: #c07090; margin-top: 2px;
+  }
 
-  @media (max-width: 768px) {
-    body {
-      padding: 16px 10px;
-    }
-
-    .event-banner {
-      padding: 14px 12px;
-      margin-bottom: 18px;
-    }
-
-    .event-banner .main {
-      font-size: 16px;
-      line-height: 1.4;
-    }
-
-    .event-banner .sub {
-      font-size: 11px;
-      line-height: 1.4;
-    }
-
-    .chart-wrap {
-      border-radius: 10px;
-    }
-
-    .grid {
-      min-width: 980px;
-    }
-
-    .legend {
-      padding: 14px 12px;
-      gap: 10px;
-    }
-
-    .legend-note {
-      margin-left: 0;
-      width: 100%;
-      font-size: 11px;
-    }
+  /* ── Scroll hint on mobile ── */
+  .scroll-hint {
+    text-align: center;
+    font-size: 11px; color: #c07090;
+    margin-bottom: 8px;
+    display: none;
+  }
+  @media (max-width: 720px) {
+    .scroll-hint { display: block; }
   }
 </style>
 </head>
@@ -200,173 +219,206 @@
 
 <div class="event-banner">
   <div class="main">🧸 &nbsp; Baby Shower &nbsp;·&nbsp; Saturday, April 4, 2026 &nbsp;·&nbsp; 210 Seattle</div>
-  <div class="sub">Guest Travel Tracker &nbsp;·&nbsp; March 31 – April 8, 2026 &nbsp;·&nbsp; Hover any cell for flight details</div>
+  <div class="sub">Guest Travel Tracker &nbsp;·&nbsp; March 31 – April 8, 2026</div>
 </div>
 
-<div class="chart-wrap">
-  <div class="scroll-area">
-    <div class="grid">
+<p class="scroll-hint">← Swipe left to see full timeline →</p>
 
-      <div class="hdr name-hdr">Traveler(s)</div>
-      <div class="hdr">Hotel / Stay</div>
-      <div class="hdr">Tue<br>3/31</div>
-      <div class="hdr">Wed<br>4/1</div>
-      <div class="hdr">Thu<br>4/2</div>
-      <div class="hdr">Fri<br>4/3</div>
-      <div class="hdr shower-col">Sat<br>4/4</div>
-      <div class="hdr weekend">Sun<br>4/5</div>
-      <div class="hdr">Mon<br>4/6</div>
-      <div class="hdr">Tue<br>4/7</div>
-      <div class="hdr extend">Wed<br>4/8</div>
+<div class="scroll-wrap">
+ <div class="chart-wrap">
+  <div class="grid">
 
-      <div class="section-sep family">👨‍👩‍👧‍👦 &nbsp; Family</div>
+    <!-- Column headers -->
+    <div class="hdr name-hdr">Traveler(s)</div>
+    <div class="hdr hotel-hdr">Hotel / Stay</div>
+    <div class="hdr">Tue<br>3/31</div>
+    <div class="hdr">Wed<br>4/1</div>
+    <div class="hdr">Thu<br>4/2</div>
+    <div class="hdr">Fri<br>4/3</div>
+    <div class="hdr shower-col">Sat<br>4/4</div>
+    <div class="hdr weekend">Sun<br>4/5</div>
+    <div class="hdr">Mon<br>4/6</div>
+    <div class="hdr">Tue<br>4/7</div>
+    <div class="hdr extend">Wed<br>4/8</div>
 
-      <div class="row-name">Maggy, Marcus,<br>Josie, Sage</div>
-      <div class="row-hotel crowne-hotel">Crowne Plaza<br>Seattle Downtown</div>
-      <div class="day-cell crowne-bar" data-tip="Arrive 3/31 · 11:02 AM · UA 1330"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
-      <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
-      <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
-      <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
-      <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 210 Seattle"><span style="font-size:18px">🧸</span><span>Shower!</span></div>
-      <div class="day-cell crowne-bar" data-tip="Depart 4/5 · 10:45 PM · UA 1763"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell empty extend-bg"></div>
+    <!-- ══════════ FAMILY ══════════ -->
+    <div class="section-sep family">👨‍👩‍👧‍👦 &nbsp; Family</div>
 
-      <div class="row-name">Maciel, Baruch,<br>Emily, Evalise</div>
-      <div class="row-hotel crowne-hotel">Crowne Plaza<br>Seattle Downtown</div>
-      <div class="day-cell crowne-bar" data-tip="Arrive 3/31 · 10:45 AM · Delta 699"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
-      <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
-      <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
-      <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
-      <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 210 Seattle"><span style="font-size:18px">🧸</span><span>Shower!</span></div>
-      <div class="day-cell crowne-lite" data-tip="In Seattle"></div>
-      <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
-      <div class="day-cell crowne-bar" data-tip="Depart 4/7 · 10:58 PM · Delta 452"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
-      <div class="day-cell empty extend-bg"></div>
+    <!-- Maggy, Marcus, Josie, Sage -->
+    <div class="row-name">Maggy, Marcus,<br>Josie, Sage</div>
+    <div class="row-hotel crowne-hotel">Crowne Plaza<br>Seattle Downtown</div>
+    <div class="day-cell crowne-bar" data-tip="Arrive 3/31 · 11:02 AM · UA 1330"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
+    <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
+    <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
+    <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
+    <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 210 Seattle"><span style="font-size:17px">🧸</span><span>Shower!</span></div>
+    <div class="day-cell crowne-bar" data-tip="Depart 4/5 · 10:45 PM · UA 1763"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell empty extend-bg"></div>
 
-      <div class="row-name">Jackie &amp; Mugi<br><span style="font-size:11px;font-weight:400;color:#a07080">(Parents)</span></div>
-      <div class="row-hotel crowne-hotel">Crowne Plaza<br>Seattle Downtown</div>
-      <div class="day-cell crowne-bar" data-tip="Arrive 3/31 · 10:45 AM · Delta 699 — same flight as Maciel group"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
-      <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
-      <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
-      <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
-      <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 210 Seattle"><span style="font-size:18px">🧸</span><span>Shower!</span></div>
-      <div class="day-cell crowne-lite" data-tip="In Seattle — departure TBD"></div>
-      <div class="day-cell crowne-lite" data-tip="Departure TBD"></div>
-      <div class="day-cell crowne-lite" data-tip="Departure TBD"></div>
-      <div class="day-cell crowne-lite extend-bg" data-tip="Departure TBD"><span style="font-size:10px;color:#1a5276;font-weight:800">TBD</span></div>
+    <!-- Maciel, Baruch, Emily, Evalise -->
+    <div class="row-name">Maciel, Baruch,<br>Emily, Evalise</div>
+    <div class="row-hotel crowne-hotel">Crowne Plaza<br>Seattle Downtown</div>
+    <div class="day-cell crowne-bar" data-tip="Arrive 3/31 · 10:45 AM · Delta 699"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
+    <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
+    <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
+    <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
+    <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 210 Seattle"><span style="font-size:17px">🧸</span><span>Shower!</span></div>
+    <div class="day-cell crowne-lite" data-tip="In Seattle"></div>
+    <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
+    <div class="day-cell crowne-bar" data-tip="Depart 4/7 · 10:58 PM · Delta 452"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
+    <div class="day-cell empty extend-bg"></div>
 
-      <div class="row-name">Derick, Kenny</div>
-      <div class="row-hotel crowne-hotel">Crowne Plaza<br><span style="font-weight:400;font-size:10px">Torres Home 4/1</span></div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell torres-bar" data-tip="Arrive 4/1 · 11:04 PM · American Airlines · Staying at Torres Home"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
-      <div class="day-cell crowne-mid" data-tip="Crowne Plaza check-in today"></div>
-      <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
-      <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 210 Seattle"><span style="font-size:18px">🧸</span><span>Shower!</span></div>
-      <div class="day-cell crowne-lite" data-tip="In Seattle"></div>
-      <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
-      <div class="day-cell crowne-bar" data-tip="Depart 4/7 · 2:38 PM · Alaska Airlines"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
-      <div class="day-cell empty extend-bg"></div>
+    <!-- Jackie & Mugi (Parents) -->
+    <div class="row-name">Jackie &amp; Mugi<br><span style="font-size:10px;font-weight:400;color:#a07080">(Parents)</span></div>
+    <div class="row-hotel crowne-hotel">Crowne Plaza<br>Seattle Downtown</div>
+    <div class="day-cell crowne-bar" data-tip="Arrive 3/31 · 10:45 AM · Delta 699 — same flight as Maciel group"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
+    <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
+    <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
+    <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
+    <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 210 Seattle"><span style="font-size:17px">🧸</span><span>Shower!</span></div>
+    <div class="day-cell crowne-lite" data-tip="In Seattle — departure TBD"></div>
+    <div class="day-cell crowne-lite" data-tip="Departure TBD"></div>
+    <div class="day-cell crowne-lite" data-tip="Departure TBD"></div>
+    <div class="day-cell crowne-lite extend-bg" data-tip="Departure TBD"><span style="font-size:9px;color:#1a5276;font-weight:800">TBD</span></div>
 
-      <div class="row-name">Jenesse,<br>Christian, AJ</div>
-      <div class="row-hotel hyatt-hotel">Hyatt Regency<br>Seattle</div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell hyatt-bar" data-tip="Arrive 4/1 · 10:00 AM"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
-      <div class="day-cell hyatt-mid" data-tip="In Seattle"></div>
-      <div class="day-cell hyatt-mid" data-tip="In Seattle"></div>
-      <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 210 Seattle"><span style="font-size:18px">🧸</span><span>Shower!</span></div>
-      <div class="day-cell hyatt-bar" data-tip="Depart 4/5 · 8:00 PM"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell empty extend-bg"></div>
+    <!-- Derick, Kenny -->
+    <div class="row-name">Derick, Kenny</div>
+    <div class="row-hotel crowne-hotel">Crowne Plaza<br><span style="font-weight:400;font-size:9px">Torres Home 4/1</span></div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell torres-bar" data-tip="Arrive 4/1 · 11:04 PM · American Airlines · Torres Home"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
+    <div class="day-cell crowne-mid" data-tip="Crowne Plaza check-in today"></div>
+    <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
+    <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 210 Seattle"><span style="font-size:17px">🧸</span><span>Shower!</span></div>
+    <div class="day-cell crowne-lite" data-tip="In Seattle"></div>
+    <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
+    <div class="day-cell crowne-bar" data-tip="Depart 4/7 · 2:38 PM · Alaska Airlines"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
+    <div class="day-cell empty extend-bg"></div>
 
-      <div class="row-name">Sam</div>
-      <div class="row-hotel crowne-hotel">Crowne Plaza<br>Seattle Downtown</div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell crowne-bar" data-tip="Arrive 4/2 · 6:53 PM"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
-      <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
-      <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 210 Seattle"><span style="font-size:18px">🧸</span><span>Shower!</span></div>
-      <div class="day-cell crowne-bar" data-tip="Depart 4/5 · 5:55 PM"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell empty extend-bg"></div>
+    <!-- Jenesse, Christian, AJ -->
+    <div class="row-name">Jenesse,<br>Christian, AJ</div>
+    <div class="row-hotel hyatt-hotel">Hyatt Regency<br>Seattle</div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell hyatt-bar" data-tip="Arrive 4/1 · 10:00 AM"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
+    <div class="day-cell hyatt-mid" data-tip="In Seattle"></div>
+    <div class="day-cell hyatt-mid" data-tip="In Seattle"></div>
+    <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 210 Seattle"><span style="font-size:17px">🧸</span><span>Shower!</span></div>
+    <div class="day-cell hyatt-bar" data-tip="Depart 4/5 · 8:00 PM"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell empty extend-bg"></div>
 
-      <div class="row-name">Olivia</div>
-      <div class="row-hotel crowne-hotel">Crowne Plaza<br>Seattle Downtown</div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell crowne-bar" data-tip="Arrive 4/3 · 11:50 PM"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
-      <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 210 Seattle"><span style="font-size:18px">🧸</span><span>Shower!</span></div>
-      <div class="day-cell crowne-bar" data-tip="Depart 4/5 · 5:55 PM"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell empty extend-bg"></div>
+    <!-- Sam -->
+    <div class="row-name">Sam</div>
+    <div class="row-hotel crowne-hotel">Crowne Plaza<br>Seattle Downtown</div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell crowne-bar" data-tip="Arrive 4/2 · 6:53 PM"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
+    <div class="day-cell crowne-mid" data-tip="In Seattle"></div>
+    <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 210 Seattle"><span style="font-size:17px">🧸</span><span>Shower!</span></div>
+    <div class="day-cell crowne-bar" data-tip="Depart 4/5 · 5:55 PM"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell empty extend-bg"></div>
 
-      <div class="row-name">Marianne<br>Procopio Hernandez</div>
-      <div class="row-hotel torres-hotel">🏠 Torres Home</div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell torres-bar" data-tip="Arrive 4/3 · 10:45 AM · Delta 699 from JFK"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
-      <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 210 Seattle"><span style="font-size:18px">🧸</span><span>Shower!</span></div>
-      <div class="day-cell torres-mid" data-tip="At Torres Home"></div>
-      <div class="day-cell torres-mid" data-tip="At Torres Home"></div>
-      <div class="day-cell torres-mid" data-tip="At Torres Home"></div>
-      <div class="day-cell torres-bar extend-bg" data-tip="Depart 4/8 · 1:45 PM · Delta 415 to JFK"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
+    <!-- Olivia -->
+    <div class="row-name">Olivia</div>
+    <div class="row-hotel crowne-hotel">Crowne Plaza<br>Seattle Downtown</div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell crowne-bar" data-tip="Arrive 4/3 · 11:50 PM"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
+    <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 210 Seattle"><span style="font-size:17px">🧸</span><span>Shower!</span></div>
+    <div class="day-cell crowne-bar" data-tip="Depart 4/5 · 5:55 PM"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell empty extend-bg"></div>
 
-      <div class="section-sep friends">🤝 &nbsp; Friends</div>
+    <!-- Marianne -->
+    <div class="row-name">Marianne<br>Procopio Hernandez</div>
+    <div class="row-hotel torres-hotel">🏠 Torres Home</div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell torres-bar" data-tip="Arrive 4/3 · 10:45 AM · Delta 699 from JFK"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
+    <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 210 Seattle"><span style="font-size:17px">🧸</span><span>Shower!</span></div>
+    <div class="day-cell torres-mid" data-tip="At Torres Home"></div>
+    <div class="day-cell torres-mid" data-tip="At Torres Home"></div>
+    <div class="day-cell torres-mid" data-tip="At Torres Home"></div>
+    <div class="day-cell torres-bar extend-bg" data-tip="Depart 4/8 · 1:45 PM · Delta 415 to JFK"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
 
-      <div class="row-name">Cathy</div>
-      <div class="row-hotel tbd-hotel">🏠 Torres Home 4/1<br><span style="font-weight:400;font-size:10px">Hotel TBD 4/2+</span></div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell torres-bar" data-tip="Arrive 4/1 · 9:58 PM · AS 379 from BWI · Res: SNAONJ · Torres Home"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
-      <div class="day-cell tbd-mid" data-tip="Hotel TBD from 4/2"></div>
-      <div class="day-cell tbd-mid" data-tip="Hotel TBD"></div>
-      <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 210 Seattle"><span style="font-size:18px">🧸</span><span>Shower!</span></div>
-      <div class="day-cell tbd-lite" data-tip="Departure TBD"></div>
-      <div class="day-cell tbd-lite" data-tip="Departure TBD"></div>
-      <div class="day-cell tbd-lite" data-tip="Departure TBD"></div>
-      <div class="day-cell tbd-lite extend-bg" data-tip="Departure TBD"><span style="font-size:10px;color:#935116;font-weight:800">TBD</span></div>
+    <!-- ══════════ FRIENDS ══════════ -->
+    <div class="section-sep friends">🤝 &nbsp; Friends</div>
 
-      <div class="row-name">PM-Naja</div>
-      <div class="row-hotel tbd-hotel">Hotel TBD</div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell tbd-bar" data-tip="Arrive 4/1 · 10:24 PM · DL688 from JFK"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
-      <div class="day-cell tbd-mid" data-tip="In Seattle"></div>
-      <div class="day-cell tbd-mid" data-tip="In Seattle"></div>
-      <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 210 Seattle"><span style="font-size:18px">🧸</span><span>Shower!</span></div>
-      <div class="day-cell tbd-bar" data-tip="Depart 4/5 · 10:58 PM · DL452 to JFK"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell empty extend-bg"></div>
+    <!-- Cathy -->
+    <div class="row-name">Cathy</div>
+    <div class="row-hotel tbd-hotel">🏠 Torres Home 4/1<br><span style="font-weight:400;font-size:9px">Hotel TBD 4/2+</span></div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell torres-bar" data-tip="Arrive 4/1 · 9:58 PM · AS 379 from BWI · Torres Home"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
+    <div class="day-cell tbd-mid" data-tip="Hotel TBD from 4/2"></div>
+    <div class="day-cell tbd-mid" data-tip="Hotel TBD"></div>
+    <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 210 Seattle"><span style="font-size:17px">🧸</span><span>Shower!</span></div>
+    <div class="day-cell tbd-lite" data-tip="Departure TBD"></div>
+    <div class="day-cell tbd-lite" data-tip="Departure TBD"></div>
+    <div class="day-cell tbd-lite" data-tip="Departure TBD"></div>
+    <div class="day-cell tbd-lite extend-bg" data-tip="Departure TBD"><span style="font-size:9px;color:#935116;font-weight:800">TBD</span></div>
 
-      <div class="row-name">Jen &amp; Andrew</div>
-      <div class="row-hotel tbd-hotel">Hotel TBD</div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell tbd-bar" data-tip="Arrive 4/3 · 8:50 PM · DL881 from MSP"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
-      <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 210 Seattle"><span style="font-size:18px">🧸</span><span>Shower!</span></div>
-      <div class="day-cell tbd-bar" data-tip="Depart 4/5 · 6:49 PM · SY284 to MSP"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell empty"></div>
-      <div class="day-cell empty extend-bg"></div>
+    <!-- PM-Naja -->
+    <div class="row-name">PM-Naja</div>
+    <div class="row-hotel tbd-hotel">Hotel TBD</div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell tbd-bar" data-tip="Arrive 4/1 · 10:24 PM · DL688 from JFK"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
+    <div class="day-cell tbd-mid" data-tip="In Seattle"></div>
+    <div class="day-cell tbd-mid" data-tip="In Seattle"></div>
+    <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 210 Seattle"><span style="font-size:17px">🧸</span><span>Shower!</span></div>
+    <div class="day-cell tbd-bar" data-tip="Depart 4/5 · 10:58 PM · DL452 to JFK"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell empty extend-bg"></div>
 
-    </div>
-  </div>
+    <!-- Jen & Andrew -->
+    <div class="row-name">Jen &amp; Andrew</div>
+    <div class="row-hotel tbd-hotel">Hotel TBD</div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell tbd-bar" data-tip="Arrive 4/3 · 8:50 PM · DL881 from MSP"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
+    <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 210 Seattle"><span style="font-size:17px">🧸</span><span>Shower!</span></div>
+    <div class="day-cell tbd-bar" data-tip="Depart 4/5 · 6:49 PM · SY284 to MSP"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell empty extend-bg"></div>
 
+  </div><!-- /grid -->
+
+  <!-- Legend -->
   <div class="legend">
     <div class="legend-item"><div class="legend-swatch" style="background:#2471a3"></div> Crowne Plaza</div>
     <div class="legend-item"><div class="legend-swatch" style="background:#1e8449"></div> Hyatt Regency</div>
     <div class="legend-item"><div class="legend-swatch" style="background:#d4607e"></div> Torres Home</div>
     <div class="legend-item"><div class="legend-swatch" style="background:#ca6f1e"></div> Hotel TBD</div>
     <div class="legend-item"><div class="legend-swatch" style="background:linear-gradient(135deg,#e8799a,#f2b3c6)"></div> 🧸 Baby Shower (Apr 4)</div>
-    <span class="legend-note">Darker shade = arrive/depart day &nbsp;·&nbsp; Lighter = in town</span>
+    <span class="legend-note">Darker shade = arrive/depart day &nbsp;·&nbsp; Lighter = in town &nbsp;·&nbsp; Tap any cell for details</span>
   </div>
-</div>
+ </div><!-- /chart-wrap -->
+</div><!-- /scroll-wrap -->
+
+<script>
+  // Mobile tap-to-show tooltip
+  document.querySelectorAll('.day-cell[data-tip]').forEach(cell => {
+    cell.addEventListener('click', function() {
+      const already = this.classList.contains('tapped');
+      document.querySelectorAll('.tapped').forEach(c => c.classList.remove('tapped'));
+      if (!already) this.classList.add('tapped');
+    });
+  });
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.day-cell')) {
+      document.querySelectorAll('.tapped').forEach(c => c.classList.remove('tapped'));
+    }
+  });
+</script>
 
 </body>
 </html>
