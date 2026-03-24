@@ -3,79 +3,70 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🧸 Baby Shower – Seattle 2026</title>
+<title>🎀 Baby Shower – Seattle 2026</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: #fdf0f4;
-    color: #2d1a22;
-    min-height: 100vh;
-  }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #fdf0f4; color: #2d1a22; min-height: 100vh; }
   #main-view { padding: 16px 12px; }
   .event-banner {
-    background: linear-gradient(135deg, #d4607e, #e8a0b8);
-    color: #fff;
-    text-align: center;
-    border-radius: 14px;
-    padding: 16px 20px;
-    margin-bottom: 20px;
+    background: linear-gradient(135deg, #d4607e, #e8a0b8); color: #fff;
+    text-align: center; border-radius: 14px; padding: 14px 20px; margin-bottom: 20px;
     box-shadow: 0 4px 18px rgba(212,96,126,0.28);
   }
   .event-banner .main { font-size: clamp(15px, 4vw, 22px); font-weight: 800; letter-spacing: 0.4px; line-height: 1.3; }
-  .event-banner .sub  { font-size: clamp(11px, 2.5vw, 13px); opacity: 0.88; margin-top: 5px; }
-  .scroll-wrap {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    border-radius: 14px;
-    box-shadow: 0 4px 24px rgba(212,96,126,0.13);
+  .event-banner .sub  { font-size: clamp(11px, 2.5vw, 13px); opacity: 0.88; margin-top: 4px; }
+  .banner-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .banner-pill {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: rgba(255,255,255,0.22); color: #fff;
+    font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 20px;
+    text-decoration: none; border: 1px solid rgba(255,255,255,0.3);
+    transition: background .15s;
   }
+  .banner-pill:hover { background: rgba(255,255,255,0.35); }
+
+  .scroll-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 14px; box-shadow: 0 4px 24px rgba(212,96,126,0.13); }
   .chart-wrap { background: #fff; border-radius: 14px; min-width: 680px; }
-  .grid {
-    display: grid;
-    grid-template-columns: 170px 115px repeat(9, minmax(52px, 1fr));
-  }
-  .hdr {
-    background: #b5476a; color: #fff;
-    font-size: 11px; font-weight: 700;
-    text-align: center; padding: 9px 3px; line-height: 1.4;
-    position: sticky; top: 0; z-index: 2;
-  }
+  .grid { display: grid; grid-template-columns: 170px 115px repeat(9, minmax(52px, 1fr)); }
+
+  /* ── Column headers ── */
+  .hdr { background: #b5476a; color: #fff; font-size: 11px; font-weight: 700; text-align: center; padding: 9px 3px; line-height: 1.4; position: sticky; top: 0; z-index: 2; }
   .hdr.name-hdr { text-align: left; padding-left: 14px; z-index: 4; }
-  .hdr.weekend   { background: #9e3a5c; }
   .hdr.shower-col { background: linear-gradient(180deg, #d4607e, #b5476a); }
-  .hdr.shower-col::after { content: '🧸'; display: block; font-size: 13px; line-height: 1; }
-  .hdr.extend    { background: #882e4c; }
-  .section-sep {
-    grid-column: 1 / -1; padding: 6px 14px;
-    font-size: 11px; font-weight: 700; letter-spacing: 1.1px; text-transform: uppercase;
-  }
+  .hdr.shower-col::after { content: '🎀'; display: block; font-size: 13px; line-height: 1; }
+
+  /* ── Section separators ── */
+  .section-sep { grid-column: 1 / -1; padding: 6px 14px; font-size: 11px; font-weight: 700; letter-spacing: 1.1px; text-transform: uppercase; }
   .section-sep.family  { background: #fde8ef; color: #9e3a5c; border-top: 2px solid #d4607e; }
   .section-sep.friends { background: #fdebd0; color: #935116; border-top: 2px solid #ca6f1e; margin-top: 4px; }
-  .row-name {
-    display: flex; align-items: center; padding: 0 6px 0 14px;
-    font-size: 12px; font-weight: 600; border-bottom: 1px solid #fae0e8;
-    min-height: 54px; background: #fffbfc; line-height: 1.35;
-    cursor: pointer; position: sticky; left: 0; z-index: 3;
-    transition: background .15s, color .15s;
-  }
+
+  /* ── Name cells ── */
+  .row-name { display: flex; align-items: center; padding: 0 6px 0 14px; font-size: 12px; font-weight: 600; border-bottom: 1px solid #fae0e8; min-height: 54px; background: #fffbfc; line-height: 1.35; cursor: pointer; position: sticky; left: 0; z-index: 3; transition: background .15s, color .15s; }
   .row-name:hover { background: #fde8ef; color: #9e3a5c; }
   .row-name .name-inner { border-bottom: 1px dotted #d4607e; }
-  .row-hotel {
-    display: flex; align-items: center; justify-content: center;
-    text-align: center; font-size: 10px; font-weight: 600;
-    padding: 4px 6px; line-height: 1.35;
-    border-bottom: 1px solid #fae0e8; border-left: 1px solid #fae0e8;
-  }
-  .day-cell {
-    border-bottom: 1px solid #fae0e8; border-left: 1px solid #fae0e8;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 10px; font-weight: 700; min-height: 54px; position: relative;
-    transition: filter .15s;
-  }
+  .row-name.row-odd { background: #fdf4f7; }
+  .row-name.row-odd:hover { background: #fde8ef; color: #9e3a5c; }
+
+  /* ── Hotel cells ── */
+  .row-hotel { display: flex; align-items: center; justify-content: center; text-align: center; font-size: 10px; font-weight: 600; padding: 4px 6px; line-height: 1.35; border-bottom: 1px solid #fae0e8; border-left: 1px solid #fae0e8; }
+  .row-hotel.row-odd { background: #fdf4f7; }
+
+  /* ── Day cells ── */
+  .day-cell { border-bottom: 1px solid #fae0e8; border-left: 1px solid #fae0e8; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; min-height: 54px; position: relative; transition: filter .15s; }
   .day-cell:active:not(.empty) { filter: brightness(.88); }
   .day-cell.empty { background: #fffbfc; }
   .day-cell.extend-bg.empty { background: #fdeef3; }
+
+  /* ── Emoji badge (contrast fix) ── */
+  .cell-badge {
+    display: inline-flex; flex-direction: column; align-items: center; gap: 2px;
+    background: rgba(255,255,255,0.22);
+    border: 1px solid rgba(255,255,255,0.28);
+    border-radius: 10px; padding: 4px 8px;
+  }
+  .big-emoji  { font-size: 18px; line-height: 1; }
+  .cell-time  { font-size: 8px; font-weight: 800; color: rgba(255,255,255,0.95); letter-spacing: 0.2px; white-space: nowrap; }
+
   /* Hotel colours */
   .crowne-bar  { background: #2471a3; color: #fff; }
   .crowne-mid  { background: #5ba3d0; color: #fff; }
@@ -93,118 +84,72 @@
   .tbd-hotel{ background: #fdebd0; color: #7e5109; border-left: 4px solid #ca6f1e; }
   .artinn-bar  { background: #7d5c9e; color: #fff; }
   .artinn-hotel{ background: #ede0f5; color: #4a2d6b; border-left: 4px solid #7d5c9e; }
-  .arrive-label, .depart-label {
-    font-size: 9px; font-weight: 800;
-    display: flex; flex-direction: column; align-items: center; gap: 2px; line-height: 1.2;
-  }
-  .arrive-label .icon, .depart-label .icon { font-size: 14px; }
-  .shower-marker {
-    background: linear-gradient(135deg, #e8799a, #f2b3c6) !important;
-    color: #fff !important;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    font-size: 9px; font-weight: 800; gap: 2px; line-height: 1.3;
-  }
-  /* ── Dinner markers ── */
-  .meet-marker {
-    background: linear-gradient(135deg, #922b21, #c0392b) !important;
-    color: #fff !important;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    font-size: 9px; font-weight: 800; gap: 2px; line-height: 1.3;
-  }
-  .dinner-badge {
-    font-size: 7px; font-weight: 800;
-    background: rgba(255,255,255,0.28);
-    padding: 1px 5px; border-radius: 3px;
-    margin-top: 2px; white-space: nowrap; letter-spacing: 0.3px;
-  }
-  /* ── Group Dinners row ── */
-  .event-row-label {
-    display: flex; align-items: center; padding: 0 6px 0 14px;
-    font-size: 10px; font-weight: 700; color: #7b2d44;
-    border-bottom: 2px solid #f0c0cc; background: #fff5f8;
-    position: sticky; left: 0; z-index: 3; min-height: 44px; line-height: 1.3;
-  }
-  .event-row-cell {
-    background: #fff5f8; border-bottom: 2px solid #f0c0cc;
-    border-left: 1px solid #fae0e8; min-height: 44px;
-  }
-  .event-row-cell.extend-tint { background: #fdeef3; }
-  .event-cell-dinner {
-    position: relative; border-bottom: 2px solid #f0c0cc;
-    border-left: 1px solid #fae0e8;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    font-size: 9px; font-weight: 800; padding: 4px; text-align: center;
-    line-height: 1.4; min-height: 44px; cursor: default;
-  }
-  .event-cell-dinner.asadero {
-    background: linear-gradient(135deg, #fde8cc, #fdf4e4);
-    color: #6e2c00; border-top: 2px solid #ca6f1e;
-  }
-  .event-cell-dinner.meet {
-    background: linear-gradient(135deg, #fde8e8, #fdf4f4);
-    color: #7b2020; border-top: 2px solid #c0392b;
-  }
-  /* Tooltips */
+
+  /* Event markers */
+  .shower-marker { background: linear-gradient(135deg, #e8799a, #f2b3c6) !important; color: #fff !important; display: flex; align-items: center; justify-content: center; }
+  .meet-marker   { background: linear-gradient(135deg, #922b21, #c0392b) !important; color: #fff !important; display: flex; align-items: center; justify-content: center; }
+
+  /* ── Split arrive + dinner cells ── */
+  .split-cell { padding: 0 !important; overflow: hidden; flex-direction: column !important; align-items: stretch !important; justify-content: stretch !important; }
+  .split-seg { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 17px; line-height: 1; pointer-events: none; }
+  .seg-crowne  { background: #2471a3; color: #fff; }
+  .seg-torres  { background: #d4607e; color: #fff; }
+  .seg-asadero { background: #a04000; color: #fff; }
+  .seg-meet    { background: #c0392b; color: #fff; }
+  /* Badge inside split cell – no bg (seg already has color), just contrast shadow */
+  .split-badge { display: inline-flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.18); border-radius: 7px; padding: 2px 5px; font-size: 16px; line-height: 1; }
+
+  /* ── Weather row ── */
+  .weather-row-label { display: flex; align-items: center; padding: 0 6px 0 14px; font-size: 10px; font-weight: 700; color: #154360; border-bottom: 2px solid #aed6f1; background: #eaf4fd; position: sticky; left: 0; z-index: 3; min-height: 54px; line-height: 1.3; }
+  .weather-cell { position: relative; background: #eaf4fd; border-bottom: 2px solid #aed6f1; border-left: 1px solid #c5dff0; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 54px; cursor: pointer; gap: 2px; padding: 4px; transition: background .15s; text-align: center; }
+  .weather-cell:hover { background: #d4e8f8; }
+  .weather-cell.ext { background: #e4eef8; border-bottom: 2px solid #aed6f1; }
+  .weather-cell .w-icon { font-size: 20px; line-height: 1; }
+  .weather-cell .w-hi   { font-size: 10px; font-weight: 800; color: #154360; }
+  .weather-cell.hotel-blank { background: #eaf4fd; border-left: 1px solid #c5dff0; }
+
+  /* ── Tooltips ── */
   @media (hover: hover) {
     .day-cell[data-tip]:hover::after,
-    .event-cell-dinner[data-tip]:hover::after {
-      content: attr(data-tip); position: absolute;
-      bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+    .weather-cell[data-tip]:hover::after {
+      content: attr(data-tip); position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
       background: #2d1a22; color: #fff; font-size: 11px; font-weight: 500;
       padding: 5px 10px; border-radius: 6px; white-space: nowrap; z-index: 20; pointer-events: none;
     }
   }
   @media (hover: none) {
     .day-cell[data-tip].tapped::after,
-    .event-cell-dinner[data-tip].tapped::after {
-      content: attr(data-tip); position: fixed;
-      bottom: 24px; left: 50%; transform: translateX(-50%);
+    .weather-cell[data-tip].tapped::after {
+      content: attr(data-tip); position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
       background: #2d1a22; color: #fff; font-size: 12px; font-weight: 500;
       padding: 8px 14px; border-radius: 8px; white-space: nowrap; z-index: 999;
       pointer-events: none; box-shadow: 0 4px 16px rgba(0,0,0,0.4);
     }
   }
-  /* Legend */
-  .legend {
-    display: flex; flex-wrap: wrap; gap: 10px; padding: 14px 16px;
-    border-top: 1px solid #fae0e8; background: #fffbfc; align-items: center;
-  }
+
+  /* ── Legend ── */
+  .legend { display: flex; flex-wrap: wrap; gap: 10px; padding: 14px 16px; border-top: 1px solid #fae0e8; background: #fffbfc; align-items: center; }
   .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #7b2d44; }
   .legend-swatch { width: 16px; height: 16px; border-radius: 4px; flex-shrink: 0; }
   .legend-note { width: 100%; font-size: 11px; font-style: italic; color: #c07090; margin-top: 2px; }
   .scroll-hint { text-align: center; font-size: 11px; color: #c07090; margin-bottom: 8px; display: none; }
   @media (max-width: 720px) { .scroll-hint { display: block; } }
+
   /* ── Detail View ── */
   #detail-view { display: none; padding: 16px 16px 40px; max-width: 520px; margin: 0 auto; }
-  .back-btn {
-    display: inline-flex; align-items: center; gap: 6px; background: #fff;
-    border: 1.5px solid #d4607e; color: #d4607e; font-size: 13px; font-weight: 700;
-    padding: 8px 16px; border-radius: 30px; cursor: pointer; margin-bottom: 20px;
-    transition: background .15s, color .15s;
-  }
+  .back-btn { display: inline-flex; align-items: center; gap: 6px; background: #fff; border: 1.5px solid #d4607e; color: #d4607e; font-size: 13px; font-weight: 700; padding: 8px 16px; border-radius: 30px; cursor: pointer; margin-bottom: 20px; transition: background .15s, color .15s; }
   .back-btn:hover { background: #d4607e; color: #fff; }
-  .detail-header {
-    background: linear-gradient(135deg, #d4607e, #e8a0b8); color: #fff;
-    border-radius: 14px; padding: 18px 20px; margin-bottom: 16px;
-    box-shadow: 0 4px 14px rgba(212,96,126,0.25);
-  }
-  .detail-header .dh-name { font-size: clamp(17px, 5vw, 22px); font-weight: 800; line-height: 1.3; }
-  .detail-header .dh-badge {
-    display: inline-block; margin-top: 6px;
-    background: rgba(255,255,255,0.25); font-size: 11px; font-weight: 700;
-    padding: 3px 10px; border-radius: 20px; letter-spacing: 0.5px;
-  }
-  .detail-card {
-    background: #fff; border-radius: 12px; padding: 16px 18px; margin-bottom: 12px;
-    box-shadow: 0 2px 12px rgba(212,96,126,0.1); border-left: 4px solid #d4607e;
-  }
+  .detail-header { background: linear-gradient(135deg, #d4607e, #e8a0b8); color: #fff; border-radius: 14px; padding: 18px 20px; margin-bottom: 16px; box-shadow: 0 4px 14px rgba(212,96,126,0.25); }
+  .detail-header .dh-name  { font-size: clamp(17px, 5vw, 22px); font-weight: 800; line-height: 1.3; }
+  .detail-header .dh-badge { display: inline-block; margin-top: 6px; background: rgba(255,255,255,0.25); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.5px; }
+  .detail-card { background: #fff; border-radius: 12px; padding: 16px 18px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(212,96,126,0.1); border-left: 4px solid #d4607e; }
   .detail-card.hotel-card { border-left-color: #2471a3; }
   .detail-card.hotel-card.hyatt  { border-left-color: #1e8449; }
   .detail-card.hotel-card.torres { border-left-color: #d4607e; }
-  .detail-card.hotel-card.tbd   { border-left-color: #ca6f1e; }
+  .detail-card.hotel-card.tbd    { border-left-color: #ca6f1e; }
   .detail-card.hotel-card.artinn { border-left-color: #7d5c9e; }
-  .detail-card.shower-card { background: linear-gradient(135deg, #fde8ef, #fdf0f4); border-left-color: #d4607e; }
-  .detail-card.dinner-card-meet { background: linear-gradient(135deg, #fdf0f0, #fff); border-left-color: #c0392b; }
+  .detail-card.shower-card  { background: linear-gradient(135deg, #fde8ef, #fdf0f4); border-left-color: #d4607e; }
+  .detail-card.dinner-card-meet    { background: linear-gradient(135deg, #fdf0f0, #fff); border-left-color: #c0392b; }
   .detail-card.dinner-card-asadero { background: linear-gradient(135deg, #fdf4ec, #fff); border-left-color: #ca6f1e; }
   .card-label { font-size: 10px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #9e3a5c; margin-bottom: 6px; }
   .hotel-card .card-label { color: #1a5276; }
@@ -217,28 +162,19 @@
   .card-main { font-size: 15px; font-weight: 700; color: #2d1a22; line-height: 1.3; }
   .card-sub  { font-size: 12px; color: #7b6070; margin-top: 3px; }
   .card-sub + .card-sub { margin-top: 1px; }
-  .card-link {
-    display: inline-flex; align-items: center; gap: 5px; margin-top: 10px;
-    background: #d4607e; color: #fff; font-size: 12px; font-weight: 700;
-    padding: 7px 14px; border-radius: 20px; text-decoration: none; transition: background .15s;
-  }
+  .card-link { display: inline-flex; align-items: center; gap: 5px; margin-top: 10px; background: #d4607e; color: #fff; font-size: 12px; font-weight: 700; padding: 7px 14px; border-radius: 20px; text-decoration: none; transition: background .15s; }
   .card-link:hover { background: #b5476a; }
   .card-link.green  { background: #1e8449; } .card-link.green:hover  { background: #155d33; }
   .card-link.blue   { background: #2471a3; } .card-link.blue:hover   { background: #1a5276; }
   .card-link.amber  { background: #ca6f1e; } .card-link.amber:hover  { background: #a04000; }
   .card-link.red    { background: #c0392b; } .card-link.red:hover    { background: #922b21; }
   .card-link.purple { background: #7d5c9e; } .card-link.purple:hover { background: #5a3d7a; }
-  .pkg-row {
-    margin-top: 8px; padding: 8px 10px;
-    background: rgba(192,57,43,0.06); border-radius: 8px; border-left: 3px solid #c0392b;
-  }
+  .card-link.slate  { background: #566573; } .card-link.slate:hover  { background: #2e4053; }
+  .pkg-row   { margin-top: 8px; padding: 8px 10px; background: rgba(192,57,43,0.06); border-radius: 8px; border-left: 3px solid #c0392b; }
   .pkg-name  { font-size: 11px; font-weight: 800; color: #922b21; }
   .pkg-price { font-size: 11px; font-weight: 600; color: #7b6070; margin-left: 6px; }
   .pkg-items { font-size: 10px; color: #7b6070; margin-top: 3px; line-height: 1.55; }
-  .incl-row {
-    margin-top: 8px; padding: 8px 10px;
-    background: rgba(26,132,73,0.06); border-radius: 8px; border-left: 3px solid #1e8449;
-  }
+  .incl-row  { margin-top: 8px; padding: 8px 10px; background: rgba(26,132,73,0.06); border-radius: 8px; border-left: 3px solid #1e8449; }
   .incl-title { font-size: 11px; font-weight: 800; color: #145a32; }
   .incl-items { font-size: 10px; color: #7b6070; margin-top: 3px; line-height: 1.55; }
   .shower-emoji { font-size: 28px; margin-bottom: 6px; }
@@ -248,14 +184,20 @@
 <!-- ═══════ MAIN VIEW ═══════ -->
 <div id="main-view">
 <div class="event-banner">
-  <div class="main">🧸 &nbsp; Baby Shower &nbsp;·&nbsp; Saturday, April 4, 2026 &nbsp;·&nbsp; 210 Seattle</div>
+  <div class="main">🎀 &nbsp; Baby Shower &nbsp;·&nbsp; Saturday, April 4, 2026 &nbsp;·&nbsp; 210 Seattle</div>
   <div class="sub">Guest Travel Tracker &nbsp;·&nbsp; March 31 – April 8, 2026 &nbsp;·&nbsp; Tap a name for full details</div>
+  <div class="banner-links">
+    <a class="banner-pill" href="https://www.tsa.gov/travel/security-screening/waitimes" target="_blank">🔒 TSA Wait Times</a>
+    <a class="banner-pill" href="https://www.fly.faa.gov/flyfaa/usmap.jsp" target="_blank">✈ FAA Delay Map</a>
+    <a class="banner-pill" href="https://www.portseattle.org/sea-tac/current-conditions" target="_blank">🛬 SEA-TAC Status</a>
+  </div>
 </div>
 <p class="scroll-hint">← Swipe left to see full timeline →</p>
 <div class="scroll-wrap">
  <div class="chart-wrap">
   <div class="grid">
-    <!-- Headers -->
+
+    <!-- ── Headers ── -->
     <div class="hdr name-hdr">Traveler(s)</div>
     <div class="hdr">Hotel / Stay</div>
     <div class="hdr">Tue<br>3/31</div>
@@ -263,158 +205,198 @@
     <div class="hdr">Thu<br>4/2</div>
     <div class="hdr">Fri<br>4/3</div>
     <div class="hdr shower-col">Sat<br>4/4</div>
-    <div class="hdr weekend">Sun<br>4/5</div>
+    <div class="hdr">Sun<br>4/5</div>
     <div class="hdr">Mon<br>4/6</div>
     <div class="hdr">Tue<br>4/7</div>
-    <div class="hdr extend">Wed<br>4/8</div>
-    <!-- ══ GROUP DINNERS ROW ══ -->
-    <div class="event-row-label">🍽️&nbsp; Group<br>Dinners</div>
-    <div class="event-row-cell" style="border-left:1px solid #fae0e8"></div>
-    <div class="event-cell-dinner asadero" data-tip="Asadero Ballard · Tue Mar 31 · 6:00–7:30 PM · Family arrivals">🥩<br>Asadero<br>6–7:30 PM</div>
-    <div class="event-row-cell"></div>
-    <div class="event-row-cell"></div>
-    <div class="event-cell-dinner meet" data-tip="MEET Korean BBQ · Fri Apr 3 · 5:15 PM · 17 guests (family) · 500 E Pike St, Seattle WA 98122">🥢<br>MEET BBQ<br>5:15 PM</div>
-    <div class="event-row-cell"></div>
-    <div class="event-row-cell"></div>
-    <div class="event-row-cell"></div>
-    <div class="event-row-cell"></div>
-    <div class="event-row-cell extend-tint"></div>
+    <div class="hdr">Wed<br>4/8</div>
+
+    <!-- ── WEATHER ROW ── -->
+    <div class="weather-row-label">🌤️&nbsp; Seattle<br>Weather</div>
+    <div class="weather-cell hotel-blank"></div>
+    <div class="weather-cell" data-date="2026-03-31" data-tip="Tue Mar 31 · High 54°F · Low 43°F · Partly cloudy · ~20% rain"><span class="w-icon">⛅</span><span class="w-hi">54°F</span></div>
+    <div class="weather-cell" data-date="2026-04-01" data-tip="Wed Apr 1 · High 48°F · Low 37°F · Rain likely · ~70% rain"><span class="w-icon">🌧️</span><span class="w-hi">48°F</span></div>
+    <div class="weather-cell" data-date="2026-04-02" data-tip="Thu Apr 2 · High 50°F · Low 34°F · Rainy · ~60% rain"><span class="w-icon">🌧️</span><span class="w-hi">50°F</span></div>
+    <div class="weather-cell" data-date="2026-04-03" data-tip="Fri Apr 3 · High 46°F · Low 36°F · Light showers · ~50% rain"><span class="w-icon">🌦️</span><span class="w-hi">46°F</span></div>
+    <div class="weather-cell" data-date="2026-04-04" data-tip="Sat Apr 4 · High 52°F · Low 45°F · Showers possible · 🎀 Baby Shower day!"><span class="w-icon">🌦️</span><span class="w-hi">52°F</span></div>
+    <div class="weather-cell" data-date="2026-04-05" data-tip="Sun Apr 5 · High 63°F · Low 45°F · Clearing up!"><span class="w-icon">☀️</span><span class="w-hi">63°F</span></div>
+    <div class="weather-cell" data-date="2026-04-06" data-tip="Mon Apr 6 · High 55°F · Low 41°F · Partly cloudy"><span class="w-icon">⛅</span><span class="w-hi">55°F</span></div>
+    <div class="weather-cell" data-date="2026-04-07" data-tip="Tue Apr 7 · High 54°F · Low 41°F · Partly cloudy"><span class="w-icon">⛅</span><span class="w-hi">54°F</span></div>
+    <div class="weather-cell ext" data-date="2026-04-08" data-tip="Wed Apr 8 · High 54°F · Low 41°F · Partly cloudy"><span class="w-icon">⛅</span><span class="w-hi">54°F</span></div>
+
     <!-- ══ FAMILY ══ -->
     <div class="section-sep family">👨‍👩‍👧‍👦 &nbsp; Family</div>
+
     <!-- Maggy, Marcus, Josie, Sage -->
     <div class="row-name" onclick="showDetail('maggy')"><span class="name-inner">Maggy, Marcus,<br>Josie &amp; Sage</span></div>
-    <div class="row-hotel crowne-hotel">Crowne Plaza<br>Seattle Downtown</div>
-    <div class="day-cell crowne-bar" data-tip="Arrive 3/31 · 11:02 AM · UA 1330 · Asadero Ballard dinner 6 PM"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span><span class="dinner-badge">🥩 6 PM</span></div>
+    <div class="row-hotel crowne-hotel">Crowne Plaza</div>
+    <div class="day-cell split-cell" data-tip="Arrive 3/31 · 11:02 AM · UA 1330 · Asadero Ballard 6 PM">
+      <div class="split-seg seg-crowne"><span class="split-badge">🛬</span></div>
+      <div class="split-seg seg-asadero"><span class="split-badge">🥩</span></div>
+    </div>
     <div class="day-cell crowne-mid" data-tip="Crowne Plaza · 1112 6th Ave, Seattle WA 98101"></div>
     <div class="day-cell crowne-mid" data-tip="Crowne Plaza · 1112 6th Ave, Seattle WA 98101"></div>
-    <div class="day-cell meet-marker" data-tip="MEET Korean BBQ · 500 E Pike St · 5:15 PM"><span style="font-size:15px">🥢</span><span>MEET BBQ</span></div>
-    <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 301 Occidental Ave S, Seattle WA"><span style="font-size:17px">🧸</span><span>Shower!</span></div>
-    <div class="day-cell crowne-bar" data-tip="Depart 4/5 · 10:45 PM · UA 1763"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
+    <div class="day-cell meet-marker" data-tip="MEET Korean BBQ · 500 E Pike St · 5:15 PM"><span class="cell-badge"><span class="big-emoji">🥢</span></span></div>
+    <div class="day-cell shower-marker" data-tip="🎀 Baby Shower · 301 Occidental Ave S, Seattle WA"><span class="cell-badge"><span class="big-emoji">🎀</span></span></div>
+    <div class="day-cell crowne-bar" data-tip="Depart 4/5 · 10:45 PM · UA 1763"><span class="cell-badge"><span class="big-emoji">🛫</span><span class="cell-time">10:45 PM</span></span></div>
     <div class="day-cell empty"></div>
     <div class="day-cell empty"></div>
     <div class="day-cell empty extend-bg"></div>
+
     <!-- Maciel, Baruch, Emily, Evelise -->
     <div class="row-name" onclick="showDetail('maciel')"><span class="name-inner">Maciel, Baruch,<br>Emily &amp; Evelise</span></div>
-    <div class="row-hotel crowne-hotel">Crowne Plaza<br>Seattle Downtown</div>
-    <div class="day-cell crowne-bar" data-tip="Arrive 3/31 · 10:45 AM · Delta 699 (JFK→SEA) · Asadero Ballard dinner 6 PM"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span><span class="dinner-badge">🥩 6 PM</span></div>
+    <div class="row-hotel crowne-hotel">Crowne Plaza</div>
+    <div class="day-cell split-cell" data-tip="Arrive 3/31 · 10:45 AM · Delta 699 (JFK→SEA) · Asadero Ballard 6 PM">
+      <div class="split-seg seg-crowne"><span class="split-badge">🛬</span></div>
+      <div class="split-seg seg-asadero"><span class="split-badge">🥩</span></div>
+    </div>
     <div class="day-cell crowne-mid" data-tip="Crowne Plaza · 1112 6th Ave, Seattle WA 98101"></div>
     <div class="day-cell crowne-mid" data-tip="Crowne Plaza · 1112 6th Ave, Seattle WA 98101"></div>
-    <div class="day-cell meet-marker" data-tip="MEET Korean BBQ · 500 E Pike St · 5:15 PM"><span style="font-size:15px">🥢</span><span>MEET BBQ</span></div>
-    <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 301 Occidental Ave S, Seattle WA"><span style="font-size:17px">🧸</span><span>Shower!</span></div>
+    <div class="day-cell meet-marker" data-tip="MEET Korean BBQ · 500 E Pike St · 5:15 PM"><span class="cell-badge"><span class="big-emoji">🥢</span></span></div>
+    <div class="day-cell shower-marker" data-tip="🎀 Baby Shower · 301 Occidental Ave S, Seattle WA"><span class="cell-badge"><span class="big-emoji">🎀</span></span></div>
     <div class="day-cell crowne-lite" data-tip="Crowne Plaza · 1112 6th Ave, Seattle WA 98101"></div>
     <div class="day-cell crowne-mid" data-tip="Crowne Plaza · 1112 6th Ave, Seattle WA 98101"></div>
-    <div class="day-cell crowne-bar" data-tip="Depart 4/7 · 10:58 PM · Delta 452 (SEA→JFK)"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
+    <div class="day-cell crowne-bar" data-tip="Depart 4/7 · 10:58 PM · Delta 452 (SEA→JFK)"><span class="cell-badge"><span class="big-emoji">🛫</span><span class="cell-time">10:58 PM</span></span></div>
     <div class="day-cell empty extend-bg"></div>
+
     <!-- Jackie & Migue -->
     <div class="row-name" onclick="showDetail('parents')"><span class="name-inner">Jackie &amp; Migue<br><span style="font-size:10px;font-weight:400;color:#a07080">(Parents)</span></span></div>
-    <div class="row-hotel crowne-hotel">Crowne Plaza<br>Seattle Downtown</div>
-    <div class="day-cell crowne-bar" data-tip="Arrive 3/31 · 10:45 AM · Delta 699 — same flight as Maciel group · Asadero Ballard dinner 6 PM"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span><span class="dinner-badge">🥩 6 PM</span></div>
+    <div class="row-hotel crowne-hotel">Crowne Plaza</div>
+    <div class="day-cell split-cell" data-tip="Arrive 3/31 · 10:45 AM · Delta 699 (same as Maciel) · Asadero Ballard 6 PM">
+      <div class="split-seg seg-crowne"><span class="split-badge">🛬</span></div>
+      <div class="split-seg seg-asadero"><span class="split-badge">🥩</span></div>
+    </div>
     <div class="day-cell crowne-mid" data-tip="Crowne Plaza · 1112 6th Ave, Seattle WA 98101"></div>
     <div class="day-cell crowne-mid" data-tip="Crowne Plaza · 1112 6th Ave, Seattle WA 98101"></div>
-    <div class="day-cell meet-marker" data-tip="MEET Korean BBQ · 500 E Pike St · 5:15 PM"><span style="font-size:15px">🥢</span><span>MEET BBQ</span></div>
-    <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 301 Occidental Ave S, Seattle WA"><span style="font-size:17px">🧸</span><span>Shower!</span></div>
-    <div class="day-cell crowne-bar" data-tip="Depart 4/5 · 10:58 PM · Delta 452 (SEA→JFK)"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
+    <div class="day-cell meet-marker" data-tip="MEET Korean BBQ · 500 E Pike St · 5:15 PM"><span class="cell-badge"><span class="big-emoji">🥢</span></span></div>
+    <div class="day-cell shower-marker" data-tip="🎀 Baby Shower · 301 Occidental Ave S, Seattle WA"><span class="cell-badge"><span class="big-emoji">🎀</span></span></div>
+    <div class="day-cell crowne-bar" data-tip="Depart 4/5 · 10:58 PM · Delta 452 (SEA→JFK)"><span class="cell-badge"><span class="big-emoji">🛫</span><span class="cell-time">10:58 PM</span></span></div>
     <div class="day-cell empty"></div>
     <div class="day-cell empty"></div>
     <div class="day-cell empty extend-bg"></div>
+
     <!-- Derick, Kenny -->
-    <div class="row-name" onclick="showDetail('derick')"><span class="name-inner">Derick, Kenny</span></div>
-    <div class="row-hotel crowne-hotel">Crowne Plaza<br><span style="font-weight:400;font-size:9px">Torres Home 4/1</span></div>
+    <div class="row-name" onclick="showDetail('derick')"><span class="name-inner">Derick &amp; Kenny</span></div>
+    <div class="row-hotel crowne-hotel">Crowne Plaza</div>
     <div class="day-cell empty"></div>
-    <div class="day-cell torres-bar" data-tip="Arrive 4/1 · 11:04 PM · American Airlines · Torres Home"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
+    <div class="day-cell torres-bar" data-tip="Arrive 4/1 · 11:04 PM · American Airlines · Torres Home"><span class="cell-badge"><span class="big-emoji">🛬</span><span class="cell-time">11:04 PM</span></span></div>
     <div class="day-cell crowne-mid" data-tip="Crowne Plaza · 1112 6th Ave, Seattle WA 98101"></div>
-    <div class="day-cell meet-marker" data-tip="MEET Korean BBQ · 500 E Pike St · 5:15 PM"><span style="font-size:15px">🥢</span><span>MEET BBQ</span></div>
-    <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 301 Occidental Ave S, Seattle WA"><span style="font-size:17px">🧸</span><span>Shower!</span></div>
+    <div class="day-cell meet-marker" data-tip="MEET Korean BBQ · 500 E Pike St · 5:15 PM"><span class="cell-badge"><span class="big-emoji">🥢</span></span></div>
+    <div class="day-cell shower-marker" data-tip="🎀 Baby Shower · 301 Occidental Ave S, Seattle WA"><span class="cell-badge"><span class="big-emoji">🎀</span></span></div>
     <div class="day-cell crowne-lite" data-tip="Crowne Plaza · 1112 6th Ave, Seattle WA 98101"></div>
     <div class="day-cell crowne-mid" data-tip="Crowne Plaza · 1112 6th Ave, Seattle WA 98101"></div>
-    <div class="day-cell crowne-bar" data-tip="Depart 4/7 · 2:38 PM · Alaska Airlines"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
+    <div class="day-cell crowne-bar" data-tip="Depart 4/7 · 2:38 PM · Alaska Airlines"><span class="cell-badge"><span class="big-emoji">🛫</span><span class="cell-time">2:38 PM</span></span></div>
     <div class="day-cell empty extend-bg"></div>
+
     <!-- Jenesse, Christian, AJ -->
     <div class="row-name" onclick="showDetail('jenesse')"><span class="name-inner">Jenesse,<br>Christian &amp; AJ</span></div>
-    <div class="row-hotel hyatt-hotel">Hyatt Regency<br>Seattle</div>
+    <div class="row-hotel hyatt-hotel">Hyatt Regency</div>
     <div class="day-cell empty"></div>
-    <div class="day-cell hyatt-bar" data-tip="Arrive 4/1 · 10:00 AM"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
+    <div class="day-cell hyatt-bar" data-tip="Arrive 4/1 · 10:00 AM"><span class="cell-badge"><span class="big-emoji">🛬</span><span class="cell-time">10:00 AM</span></span></div>
     <div class="day-cell hyatt-mid" data-tip="Hyatt Regency · 808 Howell St, Seattle WA 98101"></div>
-    <div class="day-cell meet-marker" data-tip="MEET Korean BBQ · 500 E Pike St · 5:15 PM"><span style="font-size:15px">🥢</span><span>MEET BBQ</span></div>
-    <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 301 Occidental Ave S, Seattle WA"><span style="font-size:17px">🧸</span><span>Shower!</span></div>
-    <div class="day-cell hyatt-bar" data-tip="Depart 4/5 · 8:00 PM"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
+    <div class="day-cell meet-marker" data-tip="MEET Korean BBQ · 500 E Pike St · 5:15 PM"><span class="cell-badge"><span class="big-emoji">🥢</span></span></div>
+    <div class="day-cell shower-marker" data-tip="🎀 Baby Shower · 301 Occidental Ave S, Seattle WA"><span class="cell-badge"><span class="big-emoji">🎀</span></span></div>
+    <div class="day-cell hyatt-bar" data-tip="Depart 4/5 · 8:00 PM"><span class="cell-badge"><span class="big-emoji">🛫</span><span class="cell-time">8:00 PM</span></span></div>
     <div class="day-cell empty"></div>
     <div class="day-cell empty"></div>
     <div class="day-cell empty extend-bg"></div>
+
     <!-- Sam -->
     <div class="row-name" onclick="showDetail('sam')"><span class="name-inner">Sam</span></div>
-    <div class="row-hotel crowne-hotel">Crowne Plaza<br>Seattle Downtown</div>
+    <div class="row-hotel crowne-hotel">Crowne Plaza</div>
     <div class="day-cell empty"></div>
     <div class="day-cell empty"></div>
-    <div class="day-cell crowne-bar" data-tip="Arrive 4/2 · 6:53 PM"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
-    <div class="day-cell meet-marker" data-tip="MEET Korean BBQ · 500 E Pike St · 5:15 PM"><span style="font-size:15px">🥢</span><span>MEET BBQ</span></div>
-    <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 301 Occidental Ave S, Seattle WA"><span style="font-size:17px">🧸</span><span>Shower!</span></div>
-    <div class="day-cell crowne-bar" data-tip="Depart 4/5 · 5:55 PM"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
+    <div class="day-cell crowne-bar" data-tip="Arrive 4/2 · 6:53 PM"><span class="cell-badge"><span class="big-emoji">🛬</span><span class="cell-time">6:53 PM</span></span></div>
+    <div class="day-cell meet-marker" data-tip="MEET Korean BBQ · 500 E Pike St · 5:15 PM"><span class="cell-badge"><span class="big-emoji">🥢</span></span></div>
+    <div class="day-cell shower-marker" data-tip="🎀 Baby Shower · 301 Occidental Ave S, Seattle WA"><span class="cell-badge"><span class="big-emoji">🎀</span></span></div>
+    <div class="day-cell crowne-bar" data-tip="Depart 4/5 · 5:55 PM"><span class="cell-badge"><span class="big-emoji">🛫</span><span class="cell-time">5:55 PM</span></span></div>
     <div class="day-cell empty"></div>
     <div class="day-cell empty"></div>
     <div class="day-cell empty extend-bg"></div>
+
+    <!-- Luz -->
+    <div class="row-name" onclick="showDetail('luz')"><span class="name-inner">Luz</span></div>
+    <div class="row-hotel crowne-hotel">Crowne Plaza</div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell crowne-bar" data-tip="Arrive 4/2 · 10:29 AM · EWR → SEA (departs Newark 7:18 AM)"><span class="cell-badge"><span class="big-emoji">🛬</span><span class="cell-time">10:29 AM</span></span></div>
+    <div class="day-cell meet-marker" data-tip="MEET Korean BBQ · 500 E Pike St · 5:15 PM"><span class="cell-badge"><span class="big-emoji">🥢</span></span></div>
+    <div class="day-cell shower-marker" data-tip="🎀 Baby Shower · 301 Occidental Ave S, Seattle WA"><span class="cell-badge"><span class="big-emoji">🎀</span></span></div>
+    <div class="day-cell crowne-bar" data-tip="Depart 4/5 · 9:36 PM · SEA → EWR"><span class="cell-badge"><span class="big-emoji">🛫</span><span class="cell-time">9:36 PM</span></span></div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell empty"></div>
+    <div class="day-cell empty extend-bg"></div>
+
     <!-- Olivia — arrives 11:50 PM, after MEET dinner -->
     <div class="row-name" onclick="showDetail('olivia')"><span class="name-inner">Olivia</span></div>
-    <div class="row-hotel crowne-hotel">Crowne Plaza<br>Seattle Downtown</div>
+    <div class="row-hotel crowne-hotel">Crowne Plaza</div>
     <div class="day-cell empty"></div>
     <div class="day-cell empty"></div>
     <div class="day-cell empty"></div>
-    <div class="day-cell crowne-bar" data-tip="Arrive 4/3 · 11:50 PM · Arrives after MEET dinner"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
-    <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 301 Occidental Ave S, Seattle WA"><span style="font-size:17px">🧸</span><span>Shower!</span></div>
-    <div class="day-cell crowne-bar" data-tip="Depart 4/5 · 5:55 PM"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
+    <div class="day-cell crowne-bar" data-tip="Arrive 4/3 · 11:50 PM · After MEET dinner"><span class="cell-badge"><span class="big-emoji">🛬</span><span class="cell-time">11:50 PM</span></span></div>
+    <div class="day-cell shower-marker" data-tip="🎀 Baby Shower · 301 Occidental Ave S, Seattle WA"><span class="cell-badge"><span class="big-emoji">🎀</span></span></div>
+    <div class="day-cell crowne-bar" data-tip="Depart 4/5 · 5:55 PM"><span class="cell-badge"><span class="big-emoji">🛫</span><span class="cell-time">5:55 PM</span></span></div>
     <div class="day-cell empty"></div>
     <div class="day-cell empty"></div>
     <div class="day-cell empty extend-bg"></div>
+
     <!-- Marianne -->
     <div class="row-name" onclick="showDetail('marianne')"><span class="name-inner">Marianne<br>Procopio Hernandez</span></div>
-    <div class="row-hotel torres-hotel">🏠 Torres Home</div>
+    <div class="row-hotel torres-hotel">Torres Home</div>
     <div class="day-cell empty"></div>
     <div class="day-cell empty"></div>
     <div class="day-cell empty"></div>
-    <div class="day-cell torres-bar" data-tip="Arrive 4/3 · 10:45 AM · Delta 699 (JFK→SEA) · MEET Korean BBQ dinner 5:15 PM"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span><span class="dinner-badge">🥢 5:15 PM</span></div>
-    <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 301 Occidental Ave S, Seattle WA"><span style="font-size:17px">🧸</span><span>Shower!</span></div>
+    <div class="day-cell split-cell" data-tip="Arrive 4/3 · 10:45 AM · Delta 699 (JFK→SEA) · MEET Korean BBQ 5:15 PM">
+      <div class="split-seg seg-torres"><span class="split-badge">🛬</span></div>
+      <div class="split-seg seg-meet"><span class="split-badge">🥢</span></div>
+    </div>
+    <div class="day-cell shower-marker" data-tip="🎀 Baby Shower · 301 Occidental Ave S, Seattle WA"><span class="cell-badge"><span class="big-emoji">🎀</span></span></div>
     <div class="day-cell torres-mid" data-tip="Torres Home · 1050 James St, Seattle WA 98104"></div>
     <div class="day-cell torres-mid" data-tip="Torres Home · 1050 James St, Seattle WA 98104"></div>
     <div class="day-cell torres-mid" data-tip="Torres Home · 1050 James St, Seattle WA 98104"></div>
-    <div class="day-cell torres-bar extend-bg" data-tip="Depart 4/8 · 1:45 PM · Delta 415 (SEA→JFK)"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
+    <div class="day-cell torres-bar extend-bg" data-tip="Depart 4/8 · 1:45 PM · Delta 415 (SEA→JFK)"><span class="cell-badge"><span class="big-emoji">🛫</span><span class="cell-time">1:45 PM</span></span></div>
+
     <!-- ══ FRIENDS ══ -->
     <div class="section-sep friends">🤝 &nbsp; Friends</div>
+
     <!-- Cathy -->
     <div class="row-name" onclick="showDetail('cathy')"><span class="name-inner">Cathy</span></div>
-    <div class="row-hotel tbd-hotel">🏠 Torres Home 4/1<br><span style="font-weight:400;font-size:9px">Hotel TBD 4/2+</span></div>
+    <div class="row-hotel tbd-hotel">Hotel TBD</div>
     <div class="day-cell empty"></div>
-    <div class="day-cell torres-bar" data-tip="Arrive 4/1 · 9:58 PM · AS 379 (BWI→SEA) · Torres Home"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
+    <div class="day-cell torres-bar" data-tip="Arrive 4/1 · 9:58 PM · AS 379 (BWI→SEA) · Torres Home"><span class="cell-badge"><span class="big-emoji">🛬</span><span class="cell-time">9:58 PM</span></span></div>
     <div class="day-cell tbd-mid" data-tip="Hotel TBD · 4/2+"></div>
     <div class="day-cell tbd-mid" data-tip="Hotel TBD"></div>
-    <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 301 Occidental Ave S, Seattle WA"><span style="font-size:17px">🧸</span><span>Shower!</span></div>
+    <div class="day-cell shower-marker" data-tip="🎀 Baby Shower · 301 Occidental Ave S, Seattle WA"><span class="cell-badge"><span class="big-emoji">🎀</span></span></div>
     <div class="day-cell tbd-lite" data-tip="Departure TBD"></div>
     <div class="day-cell tbd-lite" data-tip="Departure TBD"></div>
     <div class="day-cell tbd-lite" data-tip="Departure TBD"></div>
     <div class="day-cell tbd-lite extend-bg" data-tip="Departure TBD"><span style="font-size:9px;font-weight:800">TBD</span></div>
+
     <!-- PM-Naja -->
     <div class="row-name" onclick="showDetail('pmnaja')"><span class="name-inner">PM-Naja</span></div>
     <div class="row-hotel tbd-hotel">Hotel TBD</div>
     <div class="day-cell empty"></div>
-    <div class="day-cell tbd-bar" data-tip="Arrive 4/1 · 10:24 PM · DL 688 (JFK→SEA)"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
+    <div class="day-cell tbd-bar" data-tip="Arrive 4/1 · 10:24 PM · DL 688 (JFK→SEA)"><span class="cell-badge"><span class="big-emoji">🛬</span><span class="cell-time">10:24 PM</span></span></div>
     <div class="day-cell tbd-mid" data-tip="Hotel TBD"></div>
     <div class="day-cell tbd-mid" data-tip="Hotel TBD"></div>
-    <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 301 Occidental Ave S, Seattle WA"><span style="font-size:17px">🧸</span><span>Shower!</span></div>
-    <div class="day-cell tbd-bar" data-tip="Depart 4/5 · 10:58 PM · DL 452 (SEA→JFK)"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
+    <div class="day-cell shower-marker" data-tip="🎀 Baby Shower · 301 Occidental Ave S, Seattle WA"><span class="cell-badge"><span class="big-emoji">🎀</span></span></div>
+    <div class="day-cell tbd-bar" data-tip="Depart 4/5 · 10:58 PM · DL 452 (SEA→JFK)"><span class="cell-badge"><span class="big-emoji">🛫</span><span class="cell-time">10:58 PM</span></span></div>
     <div class="day-cell empty"></div>
     <div class="day-cell empty"></div>
     <div class="day-cell empty extend-bg"></div>
+
     <!-- Jen & Andrew -->
     <div class="row-name" onclick="showDetail('jen')"><span class="name-inner">Jen &amp; Andrew</span></div>
-    <div class="row-hotel artinn-hotel">The Art Inn<br>Seattle</div>
+    <div class="row-hotel artinn-hotel">The Art Inn</div>
     <div class="day-cell empty"></div>
     <div class="day-cell empty"></div>
     <div class="day-cell empty"></div>
-    <div class="day-cell artinn-bar" data-tip="Arrive 4/3 · 8:50 PM · DL 881 (MSP→SEA)"><span class="arrive-label"><span class="icon">✈</span>ARRIVE</span></div>
-    <div class="day-cell shower-marker" data-tip="🧸 Baby Shower · 301 Occidental Ave S, Seattle WA"><span style="font-size:17px">🧸</span><span>Shower!</span></div>
-    <div class="day-cell artinn-bar" data-tip="Depart 4/5 · 6:49 PM · SY 284 (SEA→MSP)"><span class="depart-label"><span class="icon">✈</span>DEPART</span></div>
+    <div class="day-cell artinn-bar" data-tip="Arrive 4/3 · 8:50 PM · DL 881 (MSP→SEA)"><span class="cell-badge"><span class="big-emoji">🛬</span><span class="cell-time">8:50 PM</span></span></div>
+    <div class="day-cell shower-marker" data-tip="🎀 Baby Shower · 301 Occidental Ave S, Seattle WA"><span class="cell-badge"><span class="big-emoji">🎀</span></span></div>
+    <div class="day-cell artinn-bar" data-tip="Depart 4/5 · 6:49 PM · SY 284 (SEA→MSP)"><span class="cell-badge"><span class="big-emoji">🛫</span><span class="cell-time">6:49 PM</span></span></div>
     <div class="day-cell empty"></div>
     <div class="day-cell empty"></div>
     <div class="day-cell empty extend-bg"></div>
+
   </div><!-- /grid -->
   <div class="legend">
     <div class="legend-item"><div class="legend-swatch" style="background:#2471a3"></div> Crowne Plaza</div>
@@ -422,44 +404,38 @@
     <div class="legend-item"><div class="legend-swatch" style="background:#d4607e"></div> Torres Home</div>
     <div class="legend-item"><div class="legend-swatch" style="background:#7d5c9e"></div> The Art Inn Seattle</div>
     <div class="legend-item"><div class="legend-swatch" style="background:#ca6f1e"></div> Hotel TBD</div>
-    <div class="legend-item"><div class="legend-swatch" style="background:linear-gradient(135deg,#e8799a,#f2b3c6)"></div> 🧸 Baby Shower (Apr 4)</div>
-    <div class="legend-item"><div class="legend-swatch" style="background:linear-gradient(135deg,#922b21,#c0392b)"></div> 🥢 MEET Korean BBQ (Apr 3, 5:15 PM)</div>
-    <div class="legend-item"><div class="legend-swatch" style="background:linear-gradient(135deg,#6e2c00,#ca6f1e)"></div> 🥩 Asadero Ballard (Mar 31, 6 PM)</div>
-    <span class="legend-note">Darker = arrive/depart · Lighter = in town · Badge on arrive cell = dinner same evening · Tap name for full itinerary</span>
+    <div class="legend-item"><div class="legend-swatch" style="background:linear-gradient(135deg,#e8799a,#f2b3c6)"></div> 🎀 Baby Shower (Apr 4)</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:linear-gradient(135deg,#922b21,#c0392b)"></div> 🥢 MEET Korean BBQ (Apr 3)</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:linear-gradient(135deg,#6e2c00,#a04000)"></div> 🥩 Asadero Ballard (Mar 31)</div>
+    <span class="legend-note">Split cell = arrive + dinner same day &nbsp;·&nbsp; 🛬 time shown = landing &nbsp;·&nbsp; 🛫 time shown = departure &nbsp;·&nbsp; Tap name for full itinerary &nbsp;·&nbsp; Weather updates automatically</span>
   </div>
  </div>
 </div>
 </div><!-- /main-view -->
+
 <!-- ═══════ DETAIL VIEW ═══════ -->
 <div id="detail-view"></div>
+
 <script>
 const SHOWER = {
-  title: "Taide & Jensse's Baby Shower",
-  date:  "Saturday, April 4, 2026",
-  time:  "12:00 PM – 4:30 PM PDT",
-  venue: "210 Seattle",
+  title: "Taide & Jensse's Baby Shower", date: "Saturday, April 4, 2026",
+  time: "12:00 PM – 4:30 PM PDT", venue: "210 Seattle",
   address: "301 Occidental Ave S, Seattle, WA 98104",
   mapUrl: "https://maps.google.com/?q=301+Occidental+Ave+S,+Seattle,+WA+98104",
-  dress: "Spring Semi-Formal Attire",
-  host:  "Jensse Torres",
-  phone: "(917)-257-6650"
+  dress: "Spring Semi-Formal Attire", host: "Jensse Torres", phone: "(917)-257-6650"
 };
 const DINNERS = {
   asadero: {
-    name: 'Asadero Ballard',
-    date: 'Tuesday, March 31',
-    time: '6:00–7:30 PM',
+    name: 'Asadero Ballard', date: 'Tuesday, March 31', time: '6:00–7:30 PM',
     address: 'Ballard Ave NW, Seattle, WA',
     mapUrl: 'https://maps.google.com/?q=Asadero+Ballard+Seattle+WA',
     note: 'Welcome dinner · Early arrivals'
   },
   meet: {
-    name: 'MEET Korean BBQ',
-    date: 'Friday, April 3',
-    time: '5:15 PM',
+    name: 'MEET Korean BBQ', date: 'Friday, April 3', time: '5:15 PM',
     address: '500 E Pike St, Seattle, WA 98122',
     mapUrl: 'https://maps.google.com/?q=500+E+Pike+St,+Seattle,+WA+98122',
-    guests: '17 guests (family) · 14 adults + 4 kids (ages 3–6)',
+    guests: '18 guests (family) · 14 adults + 4 kids (ages 3–6)',
     note: 'Pre-shower family dinner',
     menuPdf: 'MEET_Group_Dining_Menu.pdf',
     packages: [
@@ -472,221 +448,185 @@ const DINNERS = {
   }
 };
 const TRAVELERS = [
-  {
-    id: 'maggy', group: 'family',
-    name: 'Maggy, Marcus, Josie & Sage',
-    arrive: { date: 'Tue, March 31', time: '11:02 AM', flight: 'UA 1330', url: 'https://www.flightaware.com/live/flight/UAL1330', route: '' },
-    depart: { date: 'Sun, April 5',  time: '10:45 PM', flight: 'UA 1763', url: 'https://www.flightaware.com/live/flight/UAL1763', route: '' },
-    stays: [{ name: 'Crowne Plaza Seattle Downtown', address: '1112 6th Ave, Seattle, WA 98101', mapUrl: 'https://maps.google.com/?q=1112+6th+Ave,+Seattle,+WA+98101', dates: 'Mar 31 – Apr 5', cls: 'blue' }],
-    dinners: ['asadero', 'meet']
-  },
-  {
-    id: 'maciel', group: 'family',
-    name: 'Maciel, Baruch, Emily & Evelise',
-    arrive: { date: 'Tue, March 31', time: '10:45 AM', flight: 'Delta 699', url: 'https://www.flightaware.com/live/flight/DAL699', route: 'JFK → SEA' },
-    depart: { date: 'Tue, April 7',  time: '10:58 PM', flight: 'Delta 452', url: 'https://www.flightaware.com/live/flight/DAL452', route: 'SEA → JFK' },
-    stays: [{ name: 'Crowne Plaza Seattle Downtown', address: '1112 6th Ave, Seattle, WA 98101', mapUrl: 'https://maps.google.com/?q=1112+6th+Ave,+Seattle,+WA+98101', dates: 'Mar 31 – Apr 7', cls: 'blue' }],
-    dinners: ['asadero', 'meet']
-  },
-  {
-    id: 'parents', group: 'family',
-    name: 'Jackie & Migue (Parents)',
-    arrive: { date: 'Tue, March 31', time: '10:45 AM', flight: 'Delta 699', url: 'https://www.flightaware.com/live/flight/DAL699', route: 'JFK → SEA (departs 7:29 AM)' },
-    depart: { date: 'Sun, April 5',  time: '10:58 PM', flight: 'Delta 452', url: 'https://www.flightaware.com/live/flight/DAL452', route: 'SEA → JFK' },
-    stays: [{ name: 'Crowne Plaza Seattle Downtown', address: '1112 6th Ave, Seattle, WA 98101', mapUrl: 'https://maps.google.com/?q=1112+6th+Ave,+Seattle,+WA+98101', dates: 'Mar 31 – Apr 5', cls: 'blue' }],
-    dinners: ['asadero', 'meet']
-  },
-  {
-    id: 'derick', group: 'family',
-    name: 'Derick & Kenny',
-    arrive: { date: 'Wed, April 1', time: '11:04 PM', flight: 'American Airlines', url: null, route: '→ SEA' },
-    depart: { date: 'Tue, April 7', time: '2:38 PM',  flight: 'Alaska Airlines',   url: null, route: 'SEA →' },
-    stays: [
-      { name: 'Torres Home',                   address: '1050 James St, Seattle, WA 98104', mapUrl: 'https://maps.google.com/?q=1050+James+St,+Seattle,+WA+98104', dates: 'Apr 1 (arriving late night)', cls: '' },
-      { name: 'Crowne Plaza Seattle Downtown', address: '1112 6th Ave, Seattle, WA 98101',  mapUrl: 'https://maps.google.com/?q=1112+6th+Ave,+Seattle,+WA+98101',  dates: 'Apr 2 – Apr 7', cls: 'blue' }
-    ],
-    dinners: ['meet']
-  },
-  {
-    id: 'jenesse', group: 'family',
-    name: 'Jenesse, Christian & AJ',
-    arrive: { date: 'Wed, April 1', time: '10:00 AM', flight: null, url: null, route: '' },
-    depart: { date: 'Sun, April 5', time: '8:00 PM',  flight: null, url: null, route: '' },
-    stays: [{ name: 'Hyatt Regency Seattle', address: '808 Howell St, Seattle, WA 98101', mapUrl: 'https://maps.google.com/?q=808+Howell+St,+Seattle,+WA+98101', dates: 'Apr 1 – Apr 5', cls: 'green' }],
-    dinners: ['meet']
-  },
-  {
-    id: 'sam', group: 'family',
-    name: 'Sam',
-    arrive: { date: 'Thu, April 2', time: '6:53 PM', flight: null, url: null, route: '' },
-    depart: { date: 'Sun, April 5', time: '5:55 PM', flight: null, url: null, route: '' },
-    stays: [{ name: 'Crowne Plaza Seattle Downtown', address: '1112 6th Ave, Seattle, WA 98101', mapUrl: 'https://maps.google.com/?q=1112+6th+Ave,+Seattle,+WA+98101', dates: 'Apr 2 – Apr 5', cls: 'blue' }],
-    dinners: ['meet']
-  },
-  {
-    id: 'olivia', group: 'family',
-    name: 'Olivia',
-    arrive: { date: 'Fri, April 3', time: '11:50 PM', flight: null, url: null, route: '(arrives after MEET dinner)' },
-    depart: { date: 'Sun, April 5', time: '5:55 PM',  flight: null, url: null, route: '' },
-    stays: [{ name: 'Crowne Plaza Seattle Downtown', address: '1112 6th Ave, Seattle, WA 98101', mapUrl: 'https://maps.google.com/?q=1112+6th+Ave,+Seattle,+WA+98101', dates: 'Apr 3 – Apr 5', cls: 'blue' }],
-    dinners: []
-  },
-  {
-    id: 'marianne', group: 'family',
-    name: 'Marianne Procopio Hernandez',
-    arrive: { date: 'Fri, April 3', time: '10:45 AM', flight: 'Delta 699', url: 'https://www.flightaware.com/live/flight/DAL699', route: 'JFK → SEA' },
-    depart: { date: 'Wed, April 8', time: '1:45 PM',  flight: 'Delta 415', url: 'https://www.flightaware.com/live/flight/DAL415', route: 'SEA → JFK' },
-    stays: [{ name: 'Torres Home', address: '1050 James St, Seattle, WA 98104', mapUrl: 'https://maps.google.com/?q=1050+James+St,+Seattle,+WA+98104', dates: 'Apr 3 – Apr 8', cls: '' }],
-    dinners: ['meet']
-  },
-  {
-    id: 'cathy', group: 'friends',
-    name: 'Cathy',
-    arrive: { date: 'Wed, April 1', time: '9:58 PM', flight: 'AS 379', url: 'https://www.flightaware.com/live/flight/ASA379', route: 'BWI → SEA' },
-    depart: { date: 'TBD', time: '', flight: null, url: null, route: '' },
-    stays: [
-      { name: 'Torres Home', address: '1050 James St, Seattle, WA 98104', mapUrl: 'https://maps.google.com/?q=1050+James+St,+Seattle,+WA+98104', dates: 'Apr 1', cls: '' },
-      { name: 'Hotel TBD',   address: null, mapUrl: null, dates: 'Apr 2+', cls: 'amber' }
-    ],
-    dinners: []
-  },
-  {
-    id: 'pmnaja', group: 'friends',
-    name: 'PM-Naja',
-    arrive: { date: 'Wed, April 1', time: '10:24 PM', flight: 'DL 688', url: 'https://www.flightaware.com/live/flight/DAL688', route: 'JFK → SEA' },
-    depart: { date: 'Sun, April 5', time: '10:58 PM', flight: 'DL 452', url: 'https://www.flightaware.com/live/flight/DAL452', route: 'SEA → JFK' },
-    stays: [{ name: 'Hotel TBD', address: null, mapUrl: null, dates: 'Apr 1 – Apr 5', cls: 'amber' }],
-    dinners: []
-  },
-  {
-    id: 'jen', group: 'friends',
-    name: 'Jen & Andrew',
-    arrive: { date: 'Fri, April 3', time: '8:50 PM', flight: 'DL 881', url: 'https://www.flightaware.com/live/flight/DAL881', route: 'MSP → SEA' },
-    depart: { date: 'Sun, April 5', time: '6:49 PM', flight: 'SY 284', url: 'https://www.flightaware.com/live/flight/SCX284', route: 'SEA → MSP' },
-    stays: [{ name: 'The Art Inn Seattle', address: '1225 E Jefferson St, Seattle, WA 98122', mapUrl: 'https://maps.google.com/?q=1225+E+Jefferson+St,+Seattle,+WA+98122', dates: 'Apr 3 – Apr 5', cls: 'purple' }],
-    dinners: []
-  }
+  { id:'maggy', group:'family', name:'Maggy, Marcus, Josie & Sage',
+    arrive:{ date:'Tue, March 31', time:'11:02 AM', flight:'UA 1330', url:'https://www.flightaware.com/live/flight/UAL1330', route:'' },
+    depart:{ date:'Sun, April 5',  time:'10:45 PM', flight:'UA 1763', url:'https://www.flightaware.com/live/flight/UAL1763', route:'' },
+    stays:[{ name:'Crowne Plaza Seattle Downtown', address:'1112 6th Ave, Seattle, WA 98101', mapUrl:'https://maps.google.com/?q=1112+6th+Ave,+Seattle,+WA+98101', dates:'Mar 31 – Apr 5', cls:'blue' }],
+    dinners:['asadero','meet'] },
+  { id:'maciel', group:'family', name:'Maciel, Baruch, Emily & Evelise',
+    arrive:{ date:'Tue, March 31', time:'10:45 AM', flight:'Delta 699', url:'https://www.flightaware.com/live/flight/DAL699', route:'JFK → SEA' },
+    depart:{ date:'Tue, April 7',  time:'10:58 PM', flight:'Delta 452', url:'https://www.flightaware.com/live/flight/DAL452', route:'SEA → JFK' },
+    stays:[{ name:'Crowne Plaza Seattle Downtown', address:'1112 6th Ave, Seattle, WA 98101', mapUrl:'https://maps.google.com/?q=1112+6th+Ave,+Seattle,+WA+98101', dates:'Mar 31 – Apr 7', cls:'blue' }],
+    dinners:['asadero','meet'] },
+  { id:'parents', group:'family', name:'Jackie & Migue (Parents)',
+    arrive:{ date:'Tue, March 31', time:'10:45 AM', flight:'Delta 699', url:'https://www.flightaware.com/live/flight/DAL699', route:'JFK → SEA (departs 7:29 AM)' },
+    depart:{ date:'Sun, April 5',  time:'10:58 PM', flight:'Delta 452', url:'https://www.flightaware.com/live/flight/DAL452', route:'SEA → JFK' },
+    stays:[{ name:'Crowne Plaza Seattle Downtown', address:'1112 6th Ave, Seattle, WA 98101', mapUrl:'https://maps.google.com/?q=1112+6th+Ave,+Seattle,+WA+98101', dates:'Mar 31 – Apr 5', cls:'blue' }],
+    dinners:['asadero','meet'] },
+  { id:'derick', group:'family', name:'Derick & Kenny',
+    arrive:{ date:'Wed, April 1', time:'11:04 PM', flight:'American Airlines', url:null, route:'→ SEA' },
+    depart:{ date:'Tue, April 7', time:'2:38 PM',  flight:'Alaska Airlines',   url:null, route:'SEA →' },
+    stays:[
+      { name:'Torres Home',                   address:'1050 James St, Seattle, WA 98104', mapUrl:'https://maps.google.com/?q=1050+James+St,+Seattle,+WA+98104', dates:'Apr 1 (arriving late night)', cls:'' },
+      { name:'Crowne Plaza Seattle Downtown', address:'1112 6th Ave, Seattle, WA 98101',  mapUrl:'https://maps.google.com/?q=1112+6th+Ave,+Seattle,+WA+98101',  dates:'Apr 2 – Apr 7', cls:'blue' }],
+    dinners:['meet'] },
+  { id:'jenesse', group:'family', name:'Jenesse, Christian & AJ',
+    arrive:{ date:'Wed, April 1', time:'10:00 AM', flight:null, url:null, route:'' },
+    depart:{ date:'Sun, April 5', time:'8:00 PM',  flight:null, url:null, route:'' },
+    stays:[{ name:'Hyatt Regency Seattle', address:'808 Howell St, Seattle, WA 98101', mapUrl:'https://maps.google.com/?q=808+Howell+St,+Seattle,+WA+98101', dates:'Apr 1 – Apr 5', cls:'green' }],
+    dinners:['meet'] },
+  { id:'sam', group:'family', name:'Sam',
+    arrive:{ date:'Thu, April 2', time:'6:53 PM', flight:null, url:null, route:'' },
+    depart:{ date:'Sun, April 5', time:'5:55 PM', flight:null, url:null, route:'' },
+    stays:[{ name:'Crowne Plaza Seattle Downtown', address:'1112 6th Ave, Seattle, WA 98101', mapUrl:'https://maps.google.com/?q=1112+6th+Ave,+Seattle,+WA+98101', dates:'Apr 2 – Apr 5', cls:'blue' }],
+    dinners:['meet'] },
+  { id:'luz', group:'family', name:'Luz',
+    arrive:{ date:'Thu, April 2', time:'10:29 AM', flight:null, url:'https://flightaware.com/live/airport/KSEA/arrivals', urlLabel:'SEA Arrivals Board', route:'EWR → SEA · departs Newark 7:18 AM' },
+    depart:{ date:'Sun, April 5', time:'9:36 PM',  flight:null, url:'https://flightaware.com/live/airport/KSEA/departures', urlLabel:'SEA Departures Board', route:'SEA → EWR · arrives Mon Apr 6 · 5:58 AM' },
+    stays:[{ name:'Crowne Plaza Seattle Downtown', address:'1112 6th Ave, Seattle, WA 98101', mapUrl:'https://maps.google.com/?q=1112+6th+Ave,+Seattle,+WA+98101', dates:'Apr 2 – Apr 5', cls:'blue' }],
+    dinners:['meet'] },
+  { id:'olivia', group:'family', name:'Olivia',
+    arrive:{ date:'Fri, April 3', time:'11:50 PM', flight:null, url:null, route:'(arrives after MEET dinner)' },
+    depart:{ date:'Sun, April 5', time:'5:55 PM',  flight:null, url:null, route:'' },
+    stays:[{ name:'Crowne Plaza Seattle Downtown', address:'1112 6th Ave, Seattle, WA 98101', mapUrl:'https://maps.google.com/?q=1112+6th+Ave,+Seattle,+WA+98101', dates:'Apr 3 – Apr 5', cls:'blue' }],
+    dinners:[] },
+  { id:'marianne', group:'family', name:'Marianne Procopio Hernandez',
+    arrive:{ date:'Fri, April 3', time:'10:45 AM', flight:'Delta 699', url:'https://www.flightaware.com/live/flight/DAL699', route:'JFK → SEA' },
+    depart:{ date:'Wed, April 8', time:'1:45 PM',  flight:'Delta 415', url:'https://www.flightaware.com/live/flight/DAL415', route:'SEA → JFK' },
+    stays:[{ name:'Torres Home', address:'1050 James St, Seattle, WA 98104', mapUrl:'https://maps.google.com/?q=1050+James+St,+Seattle,+WA+98104', dates:'Apr 3 – Apr 8', cls:'' }],
+    dinners:['meet'] },
+  { id:'cathy', group:'friends', name:'Cathy',
+    arrive:{ date:'Wed, April 1', time:'9:58 PM', flight:'AS 379', url:'https://www.flightaware.com/live/flight/ASA379', route:'BWI → SEA' },
+    depart:{ date:'TBD', time:'', flight:null, url:null, route:'' },
+    stays:[
+      { name:'Torres Home', address:'1050 James St, Seattle, WA 98104', mapUrl:'https://maps.google.com/?q=1050+James+St,+Seattle,+WA+98104', dates:'Apr 1', cls:'' },
+      { name:'Hotel TBD',   address:null, mapUrl:null, dates:'Apr 2+', cls:'amber' }],
+    dinners:[] },
+  { id:'pmnaja', group:'friends', name:'PM-Naja',
+    arrive:{ date:'Wed, April 1', time:'10:24 PM', flight:'DL 688', url:'https://www.flightaware.com/live/flight/DAL688', route:'JFK → SEA' },
+    depart:{ date:'Sun, April 5', time:'10:58 PM', flight:'DL 452', url:'https://www.flightaware.com/live/flight/DAL452', route:'SEA → JFK' },
+    stays:[{ name:'Hotel TBD', address:null, mapUrl:null, dates:'Apr 1 – Apr 5', cls:'amber' }],
+    dinners:[] },
+  { id:'jen', group:'friends', name:'Jen & Andrew',
+    arrive:{ date:'Fri, April 3', time:'8:50 PM', flight:'DL 881', url:'https://www.flightaware.com/live/flight/DAL881', route:'MSP → SEA' },
+    depart:{ date:'Sun, April 5', time:'6:49 PM', flight:'SY 284', url:'https://www.flightaware.com/live/flight/SCX284', route:'SEA → MSP' },
+    stays:[{ name:'The Art Inn Seattle', address:'1225 E Jefferson St, Seattle, WA 98122', mapUrl:'https://maps.google.com/?q=1225+E+Jefferson+St,+Seattle,+WA+98122', dates:'Apr 3 – Apr 5', cls:'purple' }],
+    dinners:[] }
 ];
+
 function flightCard(label, info) {
   const flightLine = info.flight
-    ? `<div class="card-sub">Flight: ${info.flight}${info.route ? ' &nbsp;·&nbsp; ' + info.route : ''}</div>`
+    ? `<div class="card-sub">Flight: ${info.flight}${info.route ? ' &nbsp;·&nbsp; '+info.route : ''}</div>`
     : (info.route ? `<div class="card-sub">${info.route}</div>` : '');
-  const link = info.url
-    ? `<a class="card-link" href="${info.url}" target="_blank">View on FlightAware ↗</a>` : '';
+  const linkLabel = info.urlLabel || 'View on FlightAware';
+  const link = info.url ? `<a class="card-link ${info.urlLabel ? 'slate' : ''}" href="${info.url}" target="_blank">${linkLabel} ↗</a>` : '';
   const timeStr = info.time ? ` · ${info.time}` : '';
-  return `
-  <div class="detail-card">
-    <div class="card-label">✈ ${label}</div>
-    <div class="card-main">${info.date}${timeStr}</div>
-    ${flightLine}${link}
-  </div>`;
+  return `<div class="detail-card"><div class="card-label">✈ ${label}</div><div class="card-main">${info.date}${timeStr}</div>${flightLine}${link}</div>`;
 }
 function stayCard(stay) {
-  const hotelCls = stay.cls === 'green' ? 'hotel-card hyatt'
-    : stay.cls === 'blue'   ? 'hotel-card'
-    : stay.cls === 'amber'  ? 'hotel-card tbd'
-    : stay.cls === 'purple' ? 'hotel-card artinn'
-    : 'hotel-card torres';
-  const lc = stay.cls === 'green' ? 'green' : stay.cls === 'blue' ? 'blue' : stay.cls === 'purple' ? 'purple' : stay.cls === 'amber' ? 'amber' : '';
-  const addrLine = stay.address ? `<div class="card-sub">${stay.address}</div>` : '';
-  const link = stay.mapUrl ? `<a class="card-link ${lc}" href="${stay.mapUrl}" target="_blank">Get Directions ↗</a>` : '';
-  return `
-  <div class="detail-card ${hotelCls}">
-    <div class="card-label">🏨 HOTEL / STAY</div>
-    <div class="card-main">${stay.name}</div>
-    ${addrLine}
-    <div class="card-sub">${stay.dates}</div>
-    ${link}
-  </div>`;
+  const hcls = stay.cls==='green'?'hotel-card hyatt':stay.cls==='blue'?'hotel-card':stay.cls==='amber'?'hotel-card tbd':stay.cls==='purple'?'hotel-card artinn':'hotel-card torres';
+  const lc   = stay.cls==='green'?'green':stay.cls==='blue'?'blue':stay.cls==='purple'?'purple':stay.cls==='amber'?'amber':'';
+  const addr = stay.address ? `<div class="card-sub">${stay.address}</div>` : '';
+  const link = stay.mapUrl  ? `<a class="card-link ${lc}" href="${stay.mapUrl}" target="_blank">Get Directions ↗</a>` : '';
+  return `<div class="detail-card ${hcls}"><div class="card-label">🏨 HOTEL / STAY</div><div class="card-main">${stay.name}</div>${addr}<div class="card-sub">${stay.dates}</div>${link}</div>`;
 }
 function dinnerCard(d) {
-  const isMeet = d.name.includes('MEET');
+  const isMeet  = d.name.includes('MEET');
   const emoji   = isMeet ? '🥢' : '🥩';
   const cardCls = isMeet ? 'dinner-card-meet' : 'dinner-card-asadero';
   const linkCls = isMeet ? 'red' : 'amber';
-  const guestsLine = d.guests ? `<div class="card-sub">${d.guests}</div>` : '';
-  const noteLine   = d.note   ? `<div class="card-sub" style="font-style:italic;margin-top:3px">${d.note}</div>` : '';
+  const gLine = d.guests  ? `<div class="card-sub">${d.guests}</div>` : '';
+  const nLine = d.note    ? `<div class="card-sub" style="font-style:italic;margin-top:3px">${d.note}</div>` : '';
   const mapLink  = d.mapUrl  ? `<a class="card-link ${linkCls}" href="${d.mapUrl}" target="_blank">Get Directions ↗</a>` : '';
   const menuLink = d.menuPdf ? `<a class="card-link" href="${d.menuPdf}" target="_blank">View Menu ↗</a>` : '';
   let menuHtml = '';
   if (d.packages) {
-    const pkgs = d.packages.map(p => `
-      <div class="pkg-row">
-        <span class="pkg-name">${p.name}</span><span class="pkg-price">${p.price}</span>
-        <div class="pkg-items">${p.items.join(' &nbsp;·&nbsp; ')}</div>
-      </div>`).join('');
-    const incl = d.included ? `
-      <div class="incl-row">
-        <div class="incl-title">MKB Full Experience <span style="font-weight:500;font-style:italic;color:#7b6070">(included in all packages)</span></div>
-        <div class="incl-items">${d.included.join(' &nbsp;·&nbsp; ')}</div>
-      </div>` : '';
-    menuHtml = `
-      <div style="margin-top:10px">
-        <div style="font-size:10px;font-weight:800;letter-spacing:1px;color:#922b21;text-transform:uppercase;margin-bottom:2px">📋 Dining Packages</div>
-        ${pkgs}${incl}
-        <div style="font-size:9px;color:#a08090;margin-top:8px;font-style:italic">★ 20% service charge added · distributed to all staff</div>
-      </div>`;
+    const pkgs = d.packages.map(p=>`<div class="pkg-row"><span class="pkg-name">${p.name}</span><span class="pkg-price">${p.price}</span><div class="pkg-items">${p.items.join(' &nbsp;·&nbsp; ')}</div></div>`).join('');
+    const incl = d.included ? `<div class="incl-row"><div class="incl-title">MKB Full Experience <span style="font-weight:500;font-style:italic;color:#7b6070">(all packages)</span></div><div class="incl-items">${d.included.join(' &nbsp;·&nbsp; ')}</div></div>` : '';
+    menuHtml = `<div style="margin-top:10px"><div style="font-size:10px;font-weight:800;letter-spacing:1px;color:#922b21;text-transform:uppercase;margin-bottom:2px">📋 Dining Packages</div>${pkgs}${incl}<div style="font-size:9px;color:#a08090;margin-top:8px;font-style:italic">★ 20% service charge · distributed to all staff</div></div>`;
   }
-  return `
-  <div class="detail-card ${cardCls}">
-    <div class="card-label">🍽️ GROUP DINNER</div>
-    <div class="card-main">${emoji} ${d.name}</div>
-    <div class="card-sub">${d.date} · ${d.time}</div>
-    <div class="card-sub">${d.address}</div>
-    ${guestsLine}${noteLine}
-    ${menuHtml}
-    <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:8px">${mapLink}${menuLink}</div>
-  </div>`;
+  return `<div class="detail-card ${cardCls}"><div class="card-label">🍽️ GROUP DINNER</div><div class="card-main">${emoji} ${d.name}</div><div class="card-sub">${d.date} · ${d.time}</div><div class="card-sub">${d.address}</div>${gLine}${nLine}${menuHtml}<div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:8px">${mapLink}${menuLink}</div></div>`;
 }
 function showDetail(id) {
-  const t = TRAVELERS.find(x => x.id === id);
+  const t = TRAVELERS.find(x=>x.id===id);
   if (!t) return;
-  const badge = t.group === 'family' ? '👨‍👩‍👧‍👦 Family' : '🤝 Friends';
+  const badge = t.group==='family' ? '👨‍👩‍👧‍👦 Family' : '🤝 Friends';
   const staysHtml   = t.stays.map(stayCard).join('');
-  const dinnersHtml = (t.dinners || []).map(k => dinnerCard(DINNERS[k])).join('');
-  const showerHtml = `
-  <div class="detail-card shower-card">
-    <div class="card-label">🧸 BABY SHOWER</div>
-    <div class="shower-emoji">🧸</div>
-    <div class="card-main">${SHOWER.title}</div>
-    <div class="card-sub">${SHOWER.date}</div>
-    <div class="card-sub">${SHOWER.time}</div>
-    <div class="card-sub" style="margin-top:6px;font-weight:700">${SHOWER.venue}</div>
-    <div class="card-sub">${SHOWER.address}</div>
-    <div class="card-sub" style="margin-top:4px">👗 ${SHOWER.dress}</div>
-    <div class="card-sub">📞 Hosted by ${SHOWER.host} · ${SHOWER.phone}</div>
-    <a class="card-link" href="${SHOWER.mapUrl}" target="_blank">Get Directions ↗</a>
-  </div>`;
+  const dinnersHtml = (t.dinners||[]).map(k=>dinnerCard(DINNERS[k])).join('');
+  const showerHtml  = `<div class="detail-card shower-card"><div class="card-label">🎀 BABY SHOWER</div><div class="shower-emoji">🎀</div><div class="card-main">${SHOWER.title}</div><div class="card-sub">${SHOWER.date}</div><div class="card-sub">${SHOWER.time}</div><div class="card-sub" style="margin-top:6px;font-weight:700">${SHOWER.venue}</div><div class="card-sub">${SHOWER.address}</div><div class="card-sub" style="margin-top:4px">👗 ${SHOWER.dress}</div><div class="card-sub">📞 Hosted by ${SHOWER.host} · ${SHOWER.phone}</div><a class="card-link" href="${SHOWER.mapUrl}" target="_blank">Get Directions ↗</a></div>`;
   document.getElementById('detail-view').innerHTML = `
     <button class="back-btn" onclick="showMain()">← Back to Timeline</button>
-    <div class="detail-header">
-      <div class="dh-name">${t.name}</div>
-      <div class="dh-badge">${badge}</div>
-    </div>
-    ${flightCard('ARRIVAL', t.arrive)}
-    ${flightCard('DEPARTURE', t.depart)}
-    ${staysHtml}
-    ${dinnersHtml}
-    ${showerHtml}
-  `;
+    <div class="detail-header"><div class="dh-name">${t.name}</div><div class="dh-badge">${badge}</div></div>
+    ${flightCard('ARRIVAL',t.arrive)}${flightCard('DEPARTURE',t.depart)}
+    ${staysHtml}${dinnersHtml}${showerHtml}`;
   document.getElementById('main-view').style.display = 'none';
   document.getElementById('detail-view').style.display = 'block';
-  window.scrollTo(0, 0);
+  window.scrollTo(0,0);
 }
 function showMain() {
   document.getElementById('detail-view').style.display = 'none';
   document.getElementById('main-view').style.display = 'block';
-  window.scrollTo(0, 0);
+  window.scrollTo(0,0);
 }
-document.querySelectorAll('.day-cell[data-tip], .event-cell-dinner[data-tip]').forEach(cell => {
+
+// ── Tap tooltips ──
+document.querySelectorAll('.day-cell[data-tip], .weather-cell[data-tip]').forEach(cell => {
   cell.addEventListener('click', function(e) {
     e.stopPropagation();
     const already = this.classList.contains('tapped');
-    document.querySelectorAll('.tapped').forEach(c => c.classList.remove('tapped'));
+    document.querySelectorAll('.tapped').forEach(c=>c.classList.remove('tapped'));
     if (!already) this.classList.add('tapped');
   });
 });
-document.addEventListener('click', () => document.querySelectorAll('.tapped').forEach(c => c.classList.remove('tapped')));
+document.addEventListener('click', ()=>document.querySelectorAll('.tapped').forEach(c=>c.classList.remove('tapped')));
+
+// ── Row striping ──
+document.querySelectorAll('.row-name').forEach((el, i) => {
+  if (i % 2 === 1) {
+    el.classList.add('row-odd');
+    const hotel = el.nextElementSibling;
+    if (hotel && hotel.classList.contains('row-hotel')) hotel.classList.add('row-odd');
+  }
+});
+
+// ── Live Weather (Open-Meteo) ──
+(function(){
+  function wmoInfo(code) {
+    if (code === 0)  return {e:'☀️', d:'Clear sky'};
+    if (code <= 2)   return {e:'⛅', d:'Partly cloudy'};
+    if (code === 3)  return {e:'☁️', d:'Overcast'};
+    if (code <= 49)  return {e:'🌫️', d:'Foggy'};
+    if (code <= 55)  return {e:'🌦️', d:'Drizzle'};
+    if (code <= 65)  return {e:'🌧️', d:'Rain'};
+    if (code <= 75)  return {e:'❄️', d:'Snow'};
+    if (code <= 82)  return {e:'🌧️', d:'Rain showers'};
+    if (code <= 86)  return {e:'🌨️', d:'Snow showers'};
+    if (code <= 99)  return {e:'⛈️', d:'Thunderstorm'};
+    return {e:'🌤️', d:'Unknown'};
+  }
+  const labels = {
+    '2026-03-31':'Tue Mar 31','2026-04-01':'Wed Apr 1','2026-04-02':'Thu Apr 2',
+    '2026-04-03':'Fri Apr 3','2026-04-04':'Sat Apr 4','2026-04-05':'Sun Apr 5',
+    '2026-04-06':'Mon Apr 6','2026-04-07':'Tue Apr 7','2026-04-08':'Wed Apr 8'
+  };
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=47.6062&longitude=-122.3321&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode&temperature_unit=fahrenheit&timezone=America%2FLos_Angeles&start_date=2026-03-31&end_date=2026-04-08')
+    .then(r => r.json())
+    .then(data => {
+      const d = data.daily;
+      d.time.forEach((date, i) => {
+        const cell = document.querySelector(`.weather-cell[data-date="${date}"]`);
+        if (!cell) return;
+        const w    = wmoInfo(d.weathercode[i]);
+        const hi   = Math.round(d.temperature_2m_max[i]);
+        const lo   = Math.round(d.temperature_2m_min[i]);
+        const rain = d.precipitation_probability_max[i];
+        const note = date === '2026-04-04' ? ' · 🎀 Baby Shower day!' : '';
+        cell.innerHTML = `<span class="w-icon">${w.e}</span><span class="w-hi">${hi}°F</span>`;
+        cell.setAttribute('data-tip', `${labels[date]} · ${w.d} · Hi ${hi}°F / Lo ${lo}°F · ${rain}% rain${note}`);
+      });
+    })
+    .catch(() => {});
+})();
 </script>
 </body>
 </html>
